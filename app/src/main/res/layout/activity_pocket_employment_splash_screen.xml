@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffa900ff"
+                tools:context=".SplashScreenActivity">
+    <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
+    <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
+    <!--android:paddingTop="@dimen/activity_vertical_margin"-->
+    <!--android:paddingBottom="@dimen/activity_vertical_margin"-->
+
+    <!--android:background="@drawable/job_market_pic"-->
+
+    <!--android:textColor="#fffffc"-->
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:padding="3dp"
+        android:src="@drawable/job_market_pic"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"/>
+
+    <TextView
+        android:id="@+id/titleSplashScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_splash_screen"
+        android:gravity="center"
+        android:textAlignment="center"
+        style="@style/CustomFont"
+        android:textSize="@dimen/abc_text_size_title_material"
+        tools:ignore="MissingPrefix"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <!--<ImageView-->
+        <!--android:id="@+id/imageView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/titleSplashScreen"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:src="@mipmap/ic_launcher"/>-->
+    <!--"@drawable/advanced_phone_call_manager"-->
+</RelativeLayout>
