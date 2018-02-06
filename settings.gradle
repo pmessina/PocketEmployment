@@ -1,1 +1,1 @@
-include ':app', ':lib-realm'
+include ':app', ':greendao-recruitercalls'

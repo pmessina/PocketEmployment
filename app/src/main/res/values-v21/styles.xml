@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="PocketEmploymentTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:colorBackground">@color/background_material_light_2</item>
-        <item name="android:colorForeground">@color/foreground_material_light</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
-        <item name="android:textColorPrimary">@color/text_color_primary</item>
-        <item name="android:windowBackground">@color/colorBackground</item>
+    <!--<style name="PocketEmploymentTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+        <!--<item name="android:colorBackground">@color/background_material_light_2</item>-->
+        <!--<item name="android:colorForeground">@android:color/foreground_material_light</item>-->
+        <!--<item name="android:statusBarColor">@color/colorPrimaryDark</item>-->
+        <!--<item name="android:textColorPrimary">@color/text_color_primary</item>-->
+        <!--<item name="android:windowBackground">@color/colorBackground</item>-->
+    <!--</style>-->
+
+    <style name="MaterialTheme" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:colorPrimary">@color/primary_dark_material_dark</item>
+        <item name="android:titleTextAppearance">@color/darkred</item>
     </style>
 </resources>

@@ -16,6 +16,7 @@
 package com.jobdetailsmanager.pocketemployment
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.Menu
@@ -29,18 +30,18 @@ class SplashScreenActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_splash_screen);
+        setContentView(R.layout.activity_pocket_employment_splash_screen)
 
         //ButterKnife.bind(this);
 
         //        Typeface face= Typeface.createFromAsset(getAssets(),
-        //                "ArimaMadurai-Black.ttf");
+        //                "arimamadurai_black.ttf");
         //
         //        titleSplashScreen.setTypeface(face);
 
         Handler().postDelayed({
-            //                Intent intent = new Intent(SplashScreenActivity.this, RecruiterCallsTodoList.class);
-            //                startActivity(intent);
+                            val intent = Intent(SplashScreenActivity@this, PocketEmploymentTodoList::class.java)
+                            startActivity(intent)
             finish()
         }, 3000)
 

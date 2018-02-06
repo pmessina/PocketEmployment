@@ -1,13 +1,13 @@
 <resources>
 
-    <style name="CustomFont">
-        <item name="fontPath">ArimaMadurai-Medium.ttf</item>
-        <item name="android:textSize">20sp</item>
-    </style>
+    <!--<style name="CustomFont">-->
+        <!--<item name="fontPath">arimamadurai_medium.ttf</item>-->
+        <!--<item name="android:textSize">20sp</item>-->
+    <!--</style>-->
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+         Customize your theme here.
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -15,9 +15,27 @@
 
     <style name="PocketEmploymentTheme" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="android:colorBackground">@color/background_material_light_2</item>
-        <item name="android:colorForeground">@color/foreground_material_light</item>
+        <item name="android:colorForeground">@color/foreground_material_light_3</item>
         <item name="android:textColorPrimary">@color/text_color_primary</item>
         <item name="android:windowBackground">@color/colorBackground</item>
     </style>
+
+    <style name="CustomNewTheme" parent="Theme.AppCompat.NoActionBar" >
+        <item name="android:colorBackground">@color/background_material_dark_1</item>
+        <item name="android:colorForeground">@color/foreground_material_dark_1</item>
+        <item name="android:textColorPrimary">@color/text_color_primary</item>
+        <item name="android:textColorPrimaryInverse">@color/primary_text_material_light</item>
+    </style>
+
+    <style name="LinearLayout" parent="Theme.AppCompat">
+        <item name="android:background">@color/darkpurple</item>
+    </style>
+
+    <style name="EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@color/darkgreen</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
 
 </resources>

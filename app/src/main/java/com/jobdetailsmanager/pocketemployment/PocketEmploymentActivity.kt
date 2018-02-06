@@ -9,23 +9,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.realm.Realm
-import io.realm.RealmObject
-import io.realm.annotations.PrimaryKey
-import io.realm.annotations.RealmClass
-import io.realm.kotlin.createObject
 import kotlinx.android.synthetic.main.activity_pocket_employment.*
 import kotlinx.android.synthetic.main.activity_pocket_employment_item_layout.view.*
-import kotlin.properties.Delegates
 
 
 /**
- * The future of your employment in the palm of your hands; take control of your job process
+ * The future of your employment is in the size of your pocket; take control of your job process
  */
 class PocketEmploymentActivity : AppCompatActivity() {
-
-
-    private var realm : Realm by Delegates.notNull()
 
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -46,7 +37,8 @@ class PocketEmploymentActivity : AppCompatActivity() {
         false
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pocket_employment)
 
@@ -72,38 +64,7 @@ class PocketEmploymentActivity : AppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-//        val realm = RealmConfig(this)
-//
-//
-//        val instance = realm.setUpRealm()
-//
-//        instance.beginTransaction()
-        //val contact = instance.createObject(Contact::class.java)
-        //contact.firstName = "John"
-        //contact.lastName = "Doe"
 
-        //instance.commitTransaction()
-
-
-        //val binder = ViewBinder.Binder(ItemViewModel(), )
-        realm = Realm.getDefaultInstance()
-
-
-        realm.executeTransaction {
-            realm.createObject<Jobs>(Jobs("Position 1", "Location 1"))
-            realm.createObject<Jobs>(Jobs("Position 2", "Location 2"))
-            realm.createObject<Jobs>(Jobs("Position 3", "Location 3"))
-            realm.createObject<Jobs>(Jobs("Position 4", "Location 4"))
-            realm.createObject<Jobs>(Jobs("Position 5", "Location 5"))
-            realm.createObject<Jobs>(Jobs("Position 6", "Location 6"))
-
-        }
-
-        realm.executeTransaction {
-            adapter.jobs = realm.where(Jobs::class.java).findAll()
-            rvPositionLocation.adapter = adapter
-
-        }
 
 
     }
@@ -137,20 +98,86 @@ class PocketEmploymentActivity : AppCompatActivity() {
 
 }
 
-//@RealmClass
-//open class Contact(var firstName:String? = null, var lastName:String? = null) : RealmObject()
-//{
-//    @PrimaryKey
-//    var id:Long = 0
-//
-//}
-
-@RealmClass
-open class Jobs(var position:String? = null, var location:String? = null) : RealmObject()
+open class Jobs(var position:String? = null, var location:String? = null)
 {
-    @PrimaryKey
+    //@PrimaryKey
     var id:Long = 0
 
 }
+
+//@Component(modules=[MyModule::class])
+//interface ParentComponent
+//{
+//    fun inject(target: MyApplication)
+//
+//    //fun injectMySubComponent() : ChildComponent.Builder//Subcomponent.Builder
+//
+//    @Component.Builder
+//    interface Builder
+//    {
+//        @BindsInstance fun myContext(context: Context): Builder
+//        fun build(): ParentComponent
+//
+//    }
+//}
+
+//@Subcomponent(modules = [MyModule::class])
+//interface ChildComponent
+//{
+//    @Subcomponent.Builder
+//    interface Builder
+//    {
+//        @BindsInstance
+//        fun myContext(context: Context): Builder
+//        fun build(): ChildComponent
+//
+//    }
+//}
+
+//class MyApplication : Application()
+//{
+//
+//    @Inject @SpecificString
+//    lateinit var myString: String
+//
+//    @Inject @AnotherSpecificString
+//    lateinit var myAnotherString: String
+//
+////    val component : ParentComponent by lazy{
+////
+////        //.MyContext(applicationContext)
+////
+////
+////        DaggerParentComponent.builder().build()
+////    }
+//
+//    override fun onCreate()
+//    {
+//        super.onCreate()
+//        //component.inject(this)
+//    }
+//}
+//
+//@Module //(includes = [AnotherModule::class], subcomponents = [ChildComponent::class])
+//class MyModule
+//{
+//    @Provides
+//    fun provideString(): String = "Some Provided String"
+//}
+//
+//@Module
+//class AnotherModule
+//{
+//    @Provides
+//    fun provideAnotherString(): String = "Another String"
+//}
+//
+//@Qualifier
+//@Retention(AnnotationRetention.RUNTIME)
+//annotation class SpecificString
+//
+//@Qualifier
+//@Retention(AnnotationRetention.RUNTIME)
+//annotation class AnotherSpecificString
 
 
