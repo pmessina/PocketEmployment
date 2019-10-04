@@ -17,9 +17,9 @@ package com.jobdetailsmanager.pocketemployment
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTabHost
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTabHost
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +28,7 @@ import android.view.ViewGroup
 class InterviewsFragment : Fragment()
 {
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
 
         val view = inflater!!.inflate(R.layout.fragment_tab_host, container, false)
@@ -37,7 +37,7 @@ class InterviewsFragment : Fragment()
 
         val tabHost = view.findViewById<View>(R.id.tabHost) as FragmentTabHost
 
-        tabHost.setup(activity, childFragmentManager, android.R.id.tabcontent)
+        tabHost.setup(activity!!, childFragmentManager, android.R.id.tabcontent)
         tabHost.addTab(tabHost.newTabSpec("today").setIndicator("Today"), InterviewsTodayFragment::class.java, null)
         tabHost.addTab(tabHost.newTabSpec("thisWeek").setIndicator("This Week"), InterviewsThisWeekFragment::class.java, null)
         tabHost.addTab(tabHost.newTabSpec("thisMonth").setIndicator("This Month"), InterviewsThisMonthFragment::class.java, null)
@@ -45,7 +45,7 @@ class InterviewsFragment : Fragment()
         return view
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
     }
@@ -60,7 +60,7 @@ class InterviewsFragment : Fragment()
         {
             val drawerIndex = args.getInt("drawer_position")
             val drawerSelection = resources.getStringArray(R.array.drawer_items)[drawerIndex]
-            activity.title = drawerSelection
+            activity?.title = drawerSelection
         }
     }
 

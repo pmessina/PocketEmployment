@@ -17,15 +17,13 @@ package com.jobdetailsmanager.pocketemployment
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
-import greendao.Employer
-import greendao.JobPosition
 
 class JobPositionsDialogFragment : DialogFragment()
 {
@@ -39,25 +37,25 @@ class JobPositionsDialogFragment : DialogFragment()
 
     lateinit var greenDaoHelper: GreenDaoHelper
 
-    override fun onAttach(context: Context?)
+    override fun onAttach(context: Context)
     {
         super.onAttach(context)
         jobMarketDetailsMenuFragment = context as AddJobPositionsListener
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         //TODO: change layout name
-        val view = inflater!!.inflate(R.layout.fragment_dialog_add_job_positions, container, false)
+        val view = inflater.inflate(R.layout.fragment_dialog_add_job_positions, container, false)
 
         //TODO: Query database; insert existing job positions
 
-        greenDaoHelper = GreenDaoHelper(activity)
+        greenDaoHelper = GreenDaoHelper(activity!!)
 
-        val jobTitles = greenDaoHelper.initSession().jobPositionDao.queryBuilder().list() //Arrays.asList("Developer", "Engineer", "Programmer");
+        //val jobTitles = greenDaoHelper.initSession().jobPositionDao.queryBuilder().list() //Arrays.asList("Developer", "Engineer", "Programmer");
 
-        actvJobPositionTitle!!.setAdapter(ArrayAdapter(activity, android.R.layout.simple_dropdown_item_1line, jobTitles))
+        //actvJobPositionTitle!!.setAdapter(ArrayAdapter(activity, android.R.layout.simple_dropdown_item_1line, jobTitles))
 
         return view
     }
@@ -65,21 +63,21 @@ class JobPositionsDialogFragment : DialogFragment()
     //@OnClick(R.id.btnOkAddJobPosition)
     fun onButtonClick(view: View)
     {
-        val jobPositionDao = greenDaoHelper.initSession().jobPositionDao
-        //Won't need listener when database is implemented
-        val jobPosition = JobPosition()
-        jobPosition.jobPositionTitle = actvJobPositionTitle!!.text.toString()
-        val employer = Employer()
-        employer.employerName = edtClientName!!.text.toString()
+//        val jobPositionDao = greenDaoHelper.initSession().jobPositionDao
+//        //Won't need listener when database is implemented
+//        val jobPosition = JobPosition()
+//        jobPosition.jobPositionTitle = actvJobPositionTitle!!.text.toString()
+//        val employer = Employer()
+//        employer.employerName = edtClientName!!.text.toString()
 
         //TODO: fix employers variable and test relationship
-        jobPosition.employers = employer
+        //jobPosition.employers = employer
 
-        jobPositionDao.insert(jobPosition)
+        //jobPositionDao.insert(jobPosition)
 
         jobMarketDetailsMenuFragment.sendData("isFromViewPager")
 
-        dialog.dismiss()
+        dialog?.dismiss()
 
     }
 

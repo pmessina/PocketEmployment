@@ -21,17 +21,15 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import greendao.Contact
-import greendao.ContactDao
-import greendao.RecruiterCompany
+
 
 
 /**
@@ -45,7 +43,7 @@ class JobContactDetailsFragment : Fragment()//extends DialogFragment implements 
     internal var fragmentManager: FragmentManager? = null
     internal var transaction: FragmentTransaction? = null
 
-    private var currentContact: Contact? = null
+    //private var currentContact: Contact? = null
 
     //    @BindView(R.id.btnAccessGmail)
     //    Button btnAccessGmail;
@@ -74,14 +72,14 @@ class JobContactDetailsFragment : Fragment()//extends DialogFragment implements 
 
     lateinit var listener: OnAddContactListener
 
-    override fun onAttach(context: Context?)
+    override fun onAttach(context: Context)
     {
         super.onAttach(context)
         listener = context as OnAddContactListener
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         val view = inflater!!.inflate(R.layout.activity_recruiter_calls_details, container, false)
 
@@ -92,7 +90,7 @@ class JobContactDetailsFragment : Fragment()//extends DialogFragment implements 
 
         edtPhoneNumber!!.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
-        currentContact = Contact()
+        //currentContact = Contact()
         if (args != null)
         {
             val retrievePhoneNumber = args.getString("phoneNumber")
@@ -101,7 +99,7 @@ class JobContactDetailsFragment : Fragment()//extends DialogFragment implements 
             {
                 //tvContactNumber.setText(retrievePhoneNumber);
 
-                currentContact!!.contactPhoneNumber = retrievePhoneNumber
+                //currentContact!!.contactPhoneNumber = retrievePhoneNumber
 
             }
         }
@@ -208,16 +206,16 @@ class JobContactDetailsFragment : Fragment()//extends DialogFragment implements 
         //            edtEmailAddress.setText(currentContact.getRecruiterCompanyAddress());
         //        }
 
-        dialogManager = DialogManager(activity)
+        dialogManager = DialogManager(activity!!)
 
-        val callStateArrayAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, RecruiterCallState.values())
+        val callStateArrayAdapter = ArrayAdapter(activity!!, android.R.layout.simple_spinner_item, RecruiterCallState.values())
         spRecruiterCallState!!.adapter = callStateArrayAdapter
 
-        val contactTypeArrayAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, ContactType.values())
+        val contactTypeArrayAdapter = ArrayAdapter(activity!!, android.R.layout.simple_spinner_item, ContactType.values())
         spContactType!!.adapter = contactTypeArrayAdapter
 
 
-        spRecruiterCallState!!.setSelection(currentContact!!.contactCallState)
+        //spRecruiterCallState!!.setSelection(currentContact!!.contactCallState)
 
         spContactType!!.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
         {
@@ -293,8 +291,8 @@ class JobContactDetailsFragment : Fragment()//extends DialogFragment implements 
         //
 
         btnRecruiterCompLookup!!.setOnClickListener {
-            val intent = searchGoogleUri(currentContact!!.contactPhoneNumber)
-            startActivity(intent)
+            //val intent = searchGoogleUri(currentContact!!.contactPhoneNumber)
+            //startActivity(intent)
             //                        if (edtCompanyName.getText().toString().isEmpty())
             //                        {
             //                            dialogManager.showOkDialog("Enter Company name", "Please enter
@@ -331,50 +329,50 @@ class JobContactDetailsFragment : Fragment()//extends DialogFragment implements 
     //@OnClick(R.id.btnAddToContacts)
     fun onAddContactClick(v: View)
     {
-        val greenDaoHelper = GreenDaoHelper(activity)
+        val greenDaoHelper = GreenDaoHelper(activity!!)
 
         //TODO: Check if contact/recruiter exists before click or during click
 
         if (spContactType!!.selectedItem === ContactType.RECRUITER)
         {
-            val recruiterCompanyDao = greenDaoHelper.initSession().recruiterCompanyDao
-            val recruiterCompany = RecruiterCompany()
-            recruiterCompany.recruiterCompanyName = edtCompanyName!!.text.toString()
+//            val recruiterCompanyDao = greenDaoHelper.initSession().recruiterCompanyDao
+//            val recruiterCompany = RecruiterCompany()
+//            recruiterCompany.recruiterCompanyName = edtCompanyName!!.text.toString()
+//
+//            //If insert is not successful, -1 is returned
+//            if (recruiterCompanyDao.insert(recruiterCompany) != -1L)
+//            {
+//                Toast.makeText(activity, "Recruiter Company Added Successfully", Toast.LENGTH_LONG).show()
+//                listener.onAddContact("RecruiterCompanyUpdated")
+//
+//            }
 
-            //If insert is not successful, -1 is returned
-            if (recruiterCompanyDao.insert(recruiterCompany) != -1L)
-            {
-                Toast.makeText(activity, "Recruiter Company Added Successfully", Toast.LENGTH_LONG).show()
-                listener.onAddContact("RecruiterCompanyUpdated")
+            //val contactDao = greenDaoHelper.initSession().contactDao
 
-            }
+//            val contact = Contact()
+//            contact.contactPhoneNumber = edtPhoneNumber!!.text.toString()
+//            contact.contactFirstName = edtFirstName!!.text.toString()
+//            contact.contactLastName = edtLastName!!.text.toString()
+//            contact.contactEmailAddress = edtEmailAddress!!.text.toString()
+//            contact.contactCallState = RecruiterCallState.INITIAL_CALL.value
 
-            val contactDao = greenDaoHelper.initSession().contactDao
-
-            val contact = Contact()
-            contact.contactPhoneNumber = edtPhoneNumber!!.text.toString()
-            contact.contactFirstName = edtFirstName!!.text.toString()
-            contact.contactLastName = edtLastName!!.text.toString()
-            contact.contactEmailAddress = edtEmailAddress!!.text.toString()
-            contact.contactCallState = RecruiterCallState.INITIAL_CALL.value
-
-            if (contactDao.insert(contact) != -1L)
-            {
-                Toast.makeText(activity, "Recruiter Added Successfully", Toast.LENGTH_LONG).show()
-                listener.onAddContact("RecruiterUpdated")
-                edtFirstName!!.text.clear()
-                edtLastName!!.text.clear()
-                edtCompanyName!!.text.clear()
-                edtEmailAddress!!.text.clear()
-                edtPhoneNumber!!.text.clear()
-            }
+//            if (contactDao.insert(contact) != -1L)
+//            {
+//                Toast.makeText(activity, "Recruiter Added Successfully", Toast.LENGTH_LONG).show()
+//                listener.onAddContact("RecruiterUpdated")
+//                edtFirstName!!.text.clear()
+//                edtLastName!!.text.clear()
+//                edtCompanyName!!.text.clear()
+//                edtEmailAddress!!.text.clear()
+//                edtPhoneNumber!!.text.clear()
+//            }
         }
 
-        greenDaoHelper.closeSession()
+        //greenDaoHelper.closeSession()
 
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         //        Toolbar okCancelToolBar = (Toolbar)view.findViewById(R.id.fragToolbar);
         //        okCancelToolBar.setLayoutParams(new LinearLayout.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM));
@@ -725,7 +723,7 @@ class JobContactDetailsFragment : Fragment()//extends DialogFragment implements 
             val em = edtEmailAddress!!.text.toString()
 
             val cs = spRecruiterCallState!!.selectedItem as RecruiterCallState
-            val greenDaoHelper = GreenDaoHelper(activity)
+            val greenDaoHelper = GreenDaoHelper(activity!!)
 
             //            if (contactType == ContactType.RECRUITER)
             //            {
@@ -753,34 +751,34 @@ class JobContactDetailsFragment : Fragment()//extends DialogFragment implements 
             //            else
             //            {
 
-            val contactDao = greenDaoHelper.initSession().contactDao
+            //val contactDao = greenDaoHelper.initSession().contactDao
 
-            val queryContact = contactDao.queryBuilder().where(ContactDao.Properties.ContactId.eq(currentContact!!.contactId)).build()
+            //val queryContact = contactDao.queryBuilder().where(ContactDao.Properties.ContactId.eq(currentContact!!.contactId)).build()
 
 
-            val queryContactList = queryContact.list()
+            //val queryContactList = queryContact.list()
 
-            val contact = Contact()
+            //val contact = Contact()
 
-            if (!queryContactList.isEmpty())
-            {
-                //currentContact.setContactId(queryContactList.get(0).getContactId());
-                currentContact!!.contactFirstName = fn
-                currentContact!!.contactLastName = ln
+//            if (!queryContactList.isEmpty())
+//            {
+//                //currentContact.setContactId(queryContactList.get(0).getContactId());
+////                currentContact!!.contactFirstName = fn
+////                currentContact!!.contactLastName = ln
+//
+//                //contactDao.update(currentContact)
+//            } else
+//            {
+////                contact.contactFirstName = fn
+////                contact.contactLastName = ln
+////                //                            contact.setRecruiterCompanyName(cn);
+////                //                            contact.setRecruiterCompanyAddress(em);
+////                contactDao.insert(contact)
+//            }
 
-                contactDao.update(currentContact)
-            } else
-            {
-                contact.contactFirstName = fn
-                contact.contactLastName = ln
-                //                            contact.setRecruiterCompanyName(cn);
-                //                            contact.setRecruiterCompanyAddress(em);
-                contactDao.insert(contact)
-            }
+            //Toast.makeText(activity, "Updated  information for: " + contact.formattedRecruiterPhoneNumber, Toast.LENGTH_LONG).show()
 
-            Toast.makeText(activity, "Updated  information for: " + contact.formattedRecruiterPhoneNumber, Toast.LENGTH_LONG).show()
-
-            contactDao.refresh(contact)
+            //contactDao.refresh(contact)
             //            }
 
         }

@@ -22,15 +22,15 @@ import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
 import android.os.PersistableBundle
-import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.navigation.NavigationView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import com.github.salomonbrys.kodein.android.androidSupportFragmentScope
 import kotlinx.android.synthetic.main.activity_pocket_employment_drawer_layout.*
@@ -77,7 +77,7 @@ class PocketEmploymentTodoList : AppCompatActivity(), NavigationView.OnNavigatio
 
     internal var serviceIntent: Intent? = null
 
-    lateinit var fragmentManager:FragmentManager
+    lateinit var fragmentManager: FragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?)
     {

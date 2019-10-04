@@ -17,7 +17,7 @@ package com.jobdetailsmanager.pocketemployment
 
 import android.content.Context
 import android.os.Build
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import android.telephony.PhoneNumberUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -28,37 +28,37 @@ import android.widget.TextView
 import org.joda.time.DateTime
 import org.joda.time.LocalTime
 
-import greendao.Contact
+
 
 /**
  * Created by Admin on 6/6/2015.
  */
-class RecruiterCallsListViewAdapter(context: Context, resource: Int, private val values: List<Contact>) : ArrayAdapter<Contact>(context, resource, values)
-{
-
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View
-    {
-
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val rowView = inflater.inflate(R.layout.lv_row_layout, parent, false)
-
-        val tvPhoneNumber = rowView.findViewById(R.id.tvPhoneNumber) as TextView
-        val tvTime = rowView.findViewById(R.id.tvTime) as TextView
-
-        val c = values[position]
-        val number = c.formattedRecruiterPhoneNumber
-
-        val dateToTime = DateTime.parse(c.dateCallReceived).toLocalTime()
-
-        val formatTime = dateToTime.toString("h:mm a")
-
-        val formatPhoneNumber = PhoneNumberUtils.formatNumber(number, "US")
-
-        tvPhoneNumber.text = formatPhoneNumber
-        tvTime.text = formatTime
-
-        return rowView
-    }
-
-}
+//class RecruiterCallsListViewAdapter(context: Context, resource: Int, private val values: List<Contact>) : ArrayAdapter<Contact>(context, resource, values)
+//{
+//
+//    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+//    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View
+//    {
+//
+//        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+//        val rowView = inflater.inflate(R.layout.lv_row_layout, parent, false)
+//
+//        val tvPhoneNumber = rowView.findViewById(R.id.tvPhoneNumber) as TextView
+//        val tvTime = rowView.findViewById(R.id.tvTime) as TextView
+//
+//        val c = values[position]
+//        val number = c.formattedRecruiterPhoneNumber
+//
+//        val dateToTime = DateTime.parse(c.dateCallReceived).toLocalTime()
+//
+//        val formatTime = dateToTime.toString("h:mm a")
+//
+//        val formatPhoneNumber = PhoneNumberUtils.formatNumber(number, "US")
+//
+//        tvPhoneNumber.text = formatPhoneNumber
+//        tvTime.text = formatTime
+//
+//        return rowView
+//    }
+//
+//}

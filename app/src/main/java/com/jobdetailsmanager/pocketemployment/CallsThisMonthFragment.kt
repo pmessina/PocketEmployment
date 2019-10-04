@@ -26,7 +26,7 @@ class CallsThisMonthFragment : CallsFragment()
     private val listAdapter: InterviewsCursorAdapter? = null
     private var listView: ListView? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         return inflater!!.inflate(R.layout.fragment_lv_calls, container, false)
     }
@@ -37,7 +37,7 @@ class CallsThisMonthFragment : CallsFragment()
 
         //getLoaderManager().initLoader(3, null, this);
 
-        listView = activity.findViewById(R.id.calls_listview) as ListView
+        listView = activity?.findViewById(R.id.calls_listview) as ListView
     }
 
     //    @Override

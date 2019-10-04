@@ -19,11 +19,11 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.CursorLoader
-import android.support.v4.content.Loader
-import android.support.v4.widget.CursorAdapter
+import androidx.fragment.app.Fragment
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.CursorLoader
+import androidx.loader.content.Loader
+import androidx.cursoradapter.widget.CursorAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,7 +59,7 @@ class CallsTodayFragment : Fragment(), FragmentInjector,  LoaderManager.LoaderCa
         callsNotificationManager = injector.kodein().value.with(activity).instance()
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         val view = inflater!!.inflate(R.layout.fragment_lv_calls, container, false)
 
@@ -70,7 +70,7 @@ class CallsTodayFragment : Fragment(), FragmentInjector,  LoaderManager.LoaderCa
     {
         super.onActivityCreated(savedInstanceState)
 
-        adapter = CallsCursorAdapter(activity, null)
+        adapter = CallsCursorAdapter(activity!!, null)
 
         loaderManager.initLoader(0, null, this)
 
@@ -88,7 +88,7 @@ class CallsTodayFragment : Fragment(), FragmentInjector,  LoaderManager.LoaderCa
 
     }
 
-    override fun onCreateLoader(id: Int, args: Bundle): Loader<Cursor>
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor>
     {
         lcp = CallsLogContentProvider(activity)
 

@@ -1,1 +1,1 @@
-include ':app', ':greendao-recruitercalls'
+include ':app', ':greendao', ':greendao-recruitercalls'

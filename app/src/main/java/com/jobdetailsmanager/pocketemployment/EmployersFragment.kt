@@ -19,8 +19,8 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.support.v4.app.FragmentTransaction
-import android.support.v4.app.ListFragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.ListFragment
 import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.MenuInflater
@@ -32,27 +32,24 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 
-import greendao.Employer
-import greendao.EmployerDao
-
 class EmployersFragment : ListFragment()
 {
 
-    lateinit var employerArrayAdapter: ArrayAdapter<Employer>
+    //lateinit var employerArrayAdapter: ArrayAdapter<Employer>
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         val args = this.arguments
         if (args != null)
         {
             val drawerIndex = args.getInt("drawer_position")
             val drawerSelection = resources.getStringArray(R.array.drawer_items)[drawerIndex]
-            activity.title = drawerSelection
+            activity?.title = drawerSelection
         }
 
         return inflater!!.inflate(R.layout.fragment_employers, container, false)
@@ -65,7 +62,7 @@ class EmployersFragment : ListFragment()
         //this.registerForContextMenu(getListView());
         super.onActivityCreated(savedInstanceState)
 
-        listAdapter = ArrayAdapter(this.context, android.R.layout.simple_list_item_1, this.arguments.getStringArrayList("messages")!!)
+        listAdapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, this.arguments?.getStringArrayList("messages")!!)
 
     }
 
@@ -74,20 +71,20 @@ class EmployersFragment : ListFragment()
         //        try
         //        {
 
-        val helper = GreenDaoHelper(this.activity)
+        val helper = GreenDaoHelper(activity!!)
 
         val employerListView = this.listView
 
-        val employerList = helper.initSession().employerDao.queryBuilder().build().list()
+        //val employerList = helper.initSession().employerDao.queryBuilder().build().list()
 
-        employerArrayAdapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, employerList)
+//        employerArrayAdapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, employerList)
+//
+//        if (employerArrayAdapter.isEmpty)
+//        {
+//            ToEditEmployersFragment()
+//        }
 
-        if (employerArrayAdapter.isEmpty)
-        {
-            ToEditEmployersFragment()
-        }
-
-        employerListView.adapter = employerArrayAdapter
+        //employerListView.adapter = employerArrayAdapter
 
         employerListView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id -> ToEditEmployersFragment() }
 
@@ -100,60 +97,60 @@ class EmployersFragment : ListFragment()
 
     fun ToEditEmployersFragment()
     {
-        val fragmentTransaction = activity.supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.drawer_layout_container, EditEmployersFragment())
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
+        val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
+        fragmentTransaction?.replace(R.id.drawer_layout_container, EditEmployersFragment())
+        fragmentTransaction?.addToBackStack(null)
+        fragmentTransaction?.commit()
     }
 
-    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo)
+    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?)
     {
         super.onCreateContextMenu(menu, v, menuInfo)
 
-        val menuInflater = activity.menuInflater
-        menuInflater.inflate(R.menu.menu_employers, menu)
+        val menuInflater = activity?.menuInflater
+        menuInflater?.inflate(R.menu.menu_employers, menu)
     }
 
-    override fun onContextItemSelected(item: MenuItem?): Boolean
+    override fun onContextItemSelected(item: MenuItem): Boolean
     {
 
-        val cmi = item!!.menuInfo as AdapterView.AdapterContextMenuInfo
-        val index = cmi.position
-
-        val employer = employerArrayAdapter.getItem(index)
-
-        if (employerArrayAdapter.isEmpty)
-        {
-            ToEditEmployersFragment()
-        } else
-        {
-
-            //            final DatabaseHelper helper = OpenHelperManager.getHelper(getActivity(), DatabaseHelper.class);
-
-            val dialog = AlertDialog.Builder(activity).setTitle("Delete Employer").setMessage("Are you sure you want to delete $employer?").setPositiveButton("Yes") { dialog, which ->
-                        //                            try
-                        //                            {
-                        val helper = GreenDaoHelper(activity)
-
-                        val employerDao = helper.initSession().employerDao
-
-                        employerDao.delete(employer)
-
-                        employerArrayAdapter.remove(employer)
-
-                        Toast.makeText(activity, "Employer " + employer!!.employerName + " was deleted", Toast.LENGTH_LONG).show()
-
-                        //                            }
-                        //                            catch (SQLException e)
-                        //                            {
-                        //                                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
-                        //                            }
-                    }.setNegativeButton("No") { dialog, which ->
-                        //isRecruiter = false;
-                    }
-            val ad = dialog.create()
-            ad.show()
-        }
+//        val cmi = item!!.menuInfo as AdapterView.AdapterContextMenuInfo
+//        val index = cmi.position
+//
+//        val employer = employerArrayAdapter.getItem(index)
+//
+//        if (employerArrayAdapter.isEmpty)
+//        {
+//            ToEditEmployersFragment()
+//        } else
+//        {
+//
+//            //            final DatabaseHelper helper = OpenHelperManager.getHelper(getActivity(), DatabaseHelper.class);
+//
+//            val dialog = AlertDialog.Builder(activity).setTitle("Delete Employer").setMessage("Are you sure you want to delete $employer?").setPositiveButton("Yes") { dialog, which ->
+//                        //                            try
+//                        //                            {
+//                        val helper = GreenDaoHelper(activity!!)
+//
+//                        val employerDao = helper.initSession().employerDao
+//
+//                        employerDao.delete(employer)
+//
+//                        employerArrayAdapter.remove(employer)
+//
+//                        Toast.makeText(activity, "Employer " + employer!!.employerName + " was deleted", Toast.LENGTH_LONG).show()
+//
+//                        //                            }
+//                        //                            catch (SQLException e)
+//                        //                            {
+//                        //                                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+//                        //                            }
+//                    }.setNegativeButton("No") { dialog, which ->
+//                        //isRecruiter = false;
+//                    }
+//            val ad = dialog.create()
+//            ad.show()
+//        }
 
         return super.onContextItemSelected(item)
     }

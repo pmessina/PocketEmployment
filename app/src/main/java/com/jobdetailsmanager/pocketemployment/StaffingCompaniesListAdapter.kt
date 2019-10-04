@@ -25,8 +25,6 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageButton
 
-import greendao.RecruiterCompany
-import greendao.RecruiterCompanyDao
 
 class StaffingCompaniesListAdapter : ArrayAdapter<String>
 {
@@ -47,11 +45,11 @@ class StaffingCompaniesListAdapter : ArrayAdapter<String>
     fun remove(location: Int)
     {
         val greenDaoHelper = GreenDaoHelper(context!!)
-        val recruiterCompanyDao = greenDaoHelper.initSession().recruiterCompanyDao
+        //val recruiterCompanyDao = greenDaoHelper.initSession().recruiterCompanyDao
 
 
-        val recruiterCompanies = recruiterCompanyDao.queryBuilder().where(RecruiterCompanyDao.Properties.RecruiterCompanyName.eq(getItem(location))).build().list()
-        recruiterCompanyDao.delete(recruiterCompanies[0])
+//        val recruiterCompanies = recruiterCompanyDao.queryBuilder().where(RecruiterCompanyDao.Properties.RecruiterCompanyName.eq(getItem(location))).build().list()
+//        recruiterCompanyDao.delete(recruiterCompanies[0])
 
 
         super.remove(getItem(location))

@@ -17,10 +17,10 @@ package com.jobdetailsmanager.pocketemployment
 
 import android.database.Cursor
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.CursorLoader
-import android.support.v4.content.Loader
+import androidx.fragment.app.Fragment
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.CursorLoader
+import androidx.loader.content.Loader
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +37,7 @@ class CallsThisWeekFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
     private var lcp: CallsLogContentProvider? = null
     private var cursorLoader: CursorLoader? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         val view = inflater!!.inflate(R.layout.fragment_lv_calls, container, false)
         //ButterKnife.bind(this, view)
@@ -49,19 +49,19 @@ class CallsThisWeekFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
     {
         super.onActivityCreated(savedInstanceState)
 
-        listAdapter = CallsCursorAdapter(activity, null)
+        listAdapter = CallsCursorAdapter(context!!, null)
 
         loaderManager.initLoader(2, null, this)
 
     }
 
-    override fun onCreateLoader(id: Int, args: Bundle): Loader<Cursor>?
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor>
     {
         lcp = CallsLogContentProvider(activity)
 
         cursorLoader = lcp!!.getCallsThisWeek()
 
-        return cursorLoader
+        return cursorLoader!!
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, cursor: Cursor)

@@ -17,8 +17,8 @@ package com.jobdetailsmanager.pocketemployment
 
 import android.Manifest
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.ExpandableListAdapter
 import org.joda.time.DateTime
 import permissions.dispatcher.NeedsPermission
@@ -51,7 +51,7 @@ class RecruiterCallsLogActivity : AppCompatActivity()
     {
         val callsLogContentProvider = CallsLogContentProvider(this)
 
-        val recruiterContactDates = callsLogContentProvider.groupByDateCallsLog(callRows)
+        //val recruiterContactDates = callsLogContentProvider.groupByDateCallsLog(callRows)
         /**
          * Todo: take recruiterContact Dates and requery to find dates today, this week, this month
          * and pipe to CallsFragment tabhost
@@ -61,10 +61,10 @@ class RecruiterCallsLogActivity : AppCompatActivity()
 
         val recruiterContactKeys = ArrayList<String>()
 
-        for (o in recruiterContactDates.keys.toTypedArray())
-        {
-            recruiterContactKeys.add(o.toString())
-        }
+//        for (o in recruiterContactDates.keys.toTypedArray())
+//        {
+//            recruiterContactKeys.add(o.toString())
+//        }
 
         Collections.sort(recruiterContactKeys, Comparator { lhs, rhs ->
             val dt1 = DateTime(lhs)
@@ -75,7 +75,7 @@ class RecruiterCallsLogActivity : AppCompatActivity()
         })
 
 
-        expListAdapter = RecruiterCallsExpListAdapter(this, recruiterContactKeys, recruiterContactDates)
+        //expListAdapter = RecruiterCallsExpListAdapter(this, recruiterContactKeys, recruiterContactDates)
         //        expListView.setAdapter(expListAdapter);
         //        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
         //        {

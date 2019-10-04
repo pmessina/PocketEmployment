@@ -4,19 +4,19 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.support.v4.app.NavUtils
-import android.support.v4.content.LocalBroadcastManager
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import androidx.core.app.NavUtils
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import greendao.Contact
+
 
 open class RecruiterCallsActivity : AppCompatActivity()
 {
@@ -26,7 +26,7 @@ open class RecruiterCallsActivity : AppCompatActivity()
 
     private var broadcaster: LocalBroadcastManager? = null
 
-    lateinit var contactArrayAdapter: ArrayAdapter<Contact>
+    //lateinit var contactArrayAdapter: ArrayAdapter<Contact>
 
     internal var listView: ListView? = null
 
@@ -54,14 +54,14 @@ open class RecruiterCallsActivity : AppCompatActivity()
         //R.drawable.ic_drawer,
         drawerToggle = object : ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer)
         {
-            override fun onDrawerOpened(drawerView: View?)
+            override fun onDrawerOpened(drawerView: View)
             {
-                drawerToggle!!.setHomeAsUpIndicator(android.support.v7.appcompat.R.drawable.abc_cab_background_top_mtrl_alpha)
+                drawerToggle!!.setHomeAsUpIndicator(com.google.android.material.R.drawable.abc_cab_background_top_mtrl_alpha)
 
                 invalidateOptionsMenu()
             }
 
-            override fun onDrawerClosed(drawerView: View?)
+            override fun onDrawerClosed(drawerView: View)
             {
                 drawerToggle!!.setHomeAsUpIndicator(R.drawable.ic_drawer)
                 invalidateOptionsMenu()

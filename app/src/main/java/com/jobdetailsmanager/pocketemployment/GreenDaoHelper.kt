@@ -18,8 +18,8 @@ package com.jobdetailsmanager.pocketemployment
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 
-import greendao.DaoMaster
-import greendao.DaoSession
+//import greendao.DaoMaster
+//import greendao.DaoSession
 
 /**
  * Created by Admin on 10/15/2016.
@@ -27,23 +27,23 @@ import greendao.DaoSession
 
 class GreenDaoHelper(internal var context: Context)
 {
-    lateinit var daoSession: DaoSession
-    lateinit var db: SQLiteDatabase
-
-    fun initSession(): DaoSession
-    {
-        val devOpenHelper = DaoMaster.DevOpenHelper(context, "recruiters-db")
-
-        db = devOpenHelper.writableDatabase
-        val daoMaster = DaoMaster(db)
-        daoSession = daoMaster.newSession()
-        return daoSession
-    }
-
-
-    fun closeSession()
-    {
-        daoSession.clear()
-        db.close()
-    }
+//    lateinit var daoSession: DaoSession
+//    lateinit var db: SQLiteDatabase
+//
+//    fun initSession(): DaoSession
+//    {
+//        //val devOpenHelper = DaoMaster.DevOpenHelper(context, "recruiters-db")
+//
+//        db = devOpenHelper.writableDatabase
+//        val daoMaster = DaoMaster(db)
+//        daoSession = daoMaster.newSession()
+//        return daoSession
+//    }
+//
+//
+//    fun closeSession()
+//    {
+//        daoSession.clear()
+//        db.close()
+//    }
 }

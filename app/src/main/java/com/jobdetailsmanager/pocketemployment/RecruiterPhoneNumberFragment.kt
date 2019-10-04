@@ -18,9 +18,9 @@ package com.jobdetailsmanager.pocketemployment
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
 import android.text.TextWatcher
@@ -44,13 +44,13 @@ class RecruiterPhoneNumberFragment : Fragment()
     internal var phoneNumberListener: AddPhoneNumberListener? = null
 
 
-    override fun onAttach(context: Context?)
+    override fun onAttach(context: Context)
     {
         super.onAttach(context)
     }
 
 
-    override fun onAttachFragment(childFragment: Fragment?)
+    override fun onAttachFragment(childFragment: Fragment)
     {
         super.onAttachFragment(childFragment)
 
@@ -65,10 +65,10 @@ class RecruiterPhoneNumberFragment : Fragment()
         //setRetainInstance(true);
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
-        val entryCount = getFragmentManager().backStackEntryCount
-        Toast.makeText(activity, "Child BackStack Entry Count: " + entryCount + "", Toast.LENGTH_SHORT).show()
+        val entryCount = fragmentManager!!.backStackEntryCount
+        Toast.makeText(activity, "Child BackStack Entry Count: $entryCount", Toast.LENGTH_SHORT).show()
         // Inflate the layout for this fragment
         //        if (entryCount > 0)
         //        {
@@ -76,31 +76,30 @@ class RecruiterPhoneNumberFragment : Fragment()
         //        }
         //        else
         //        {
-        return inflater!!.inflate(R.layout.fragment_recruiter_phone_number, container, false)
+        return inflater.inflate(R.layout.fragment_recruiter_phone_number, container, false)
         //        }
 
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         var savedInstanceState = savedInstanceState
 
-        when (view!!.id)
+        when (view.id)
         {
             R.id.llAddRecruiterPhoneNumber ->
             {
                 val imgAdd = view.findViewById(R.id.imgbtnPlus) as ImageButton
 
-                imgAdd.setOnClickListener({
+                imgAdd.setOnClickListener {
                     val parentFragment = parentFragment
 
                     phoneNumberListener = parentFragment as AddPhoneNumberListener
 
-                    if (phoneNumberListener != null)
-                    {
-                        phoneNumberListener!!.AddPhoneNumber(fragmentManager)
+                    if (phoneNumberListener != null) {
+                        phoneNumberListener!!.AddPhoneNumber(fragmentManager!!)
                     }
-                })
+                }
 
             }
         //            case R.id.llRemoveRecruiterPhoneNumber:
@@ -243,7 +242,7 @@ class RecruiterPhoneNumberFragment : Fragment()
 
     }
 
-    override fun onSaveInstanceState(outState: Bundle?)
+    override fun onSaveInstanceState(outState: Bundle)
     {
         super.onSaveInstanceState(outState)
         //Toast.makeText(getActivity(), "Saved Instance State", Toast.LENGTH_SHORT).show();

@@ -20,7 +20,7 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +33,6 @@ import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
-import greendao.Interview
 import kotlinx.android.synthetic.main.fragment_edit_interviews.*
 
 class EditInterviewsFragment : Fragment()
@@ -72,7 +71,7 @@ class EditInterviewsFragment : Fragment()
         btnDate!!.text = fmtTime!!.print(startDateTime)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         return inflater!!.inflate(R.layout.fragment_edit_interviews, container, false)
     }
@@ -94,16 +93,16 @@ class EditInterviewsFragment : Fragment()
         val bundle = arguments
         if (bundle != null)
         {
-            val interview = bundle.getSerializable("Interview") as Interview
-            if (interview != null)
-            {
-                edtInterviewTitle.setText(interview.interviewType)
-                btnStartTime!!.text = interview.startTime
-                btnEndTime!!.text = interview.endTime
-            }
+//            val interview = bundle.getSerializable("Interview") as Interview
+//            if (interview != null)
+//            {
+//                edtInterviewTitle.setText(interview.interviewType)
+//                btnStartTime!!.text = interview.startTime
+//                btnEndTime!!.text = interview.endTime
+//            }
         }
 
-        val dateDialog = DatePickerDialog(activity, dateSetListener, DateTime.now().year, DateTime.now().monthOfYear, DateTime.now().dayOfMonth)
+        val dateDialog = DatePickerDialog(activity!!, dateSetListener, DateTime.now().year, DateTime.now().monthOfYear, DateTime.now().dayOfMonth)
         val startTimeDialog = TimePickerDialog(activity, TimePickerDialog.THEME_HOLO_LIGHT, startTimeListener, DateTime.now().hourOfDay, DateTime.now().minuteOfHour, false)
         val endTimeDialog = TimePickerDialog(activity, TimePickerDialog.THEME_HOLO_LIGHT, endTimeListener, DateTime.now().hourOfDay, DateTime.now().minuteOfHour, false)
 
@@ -112,7 +111,7 @@ class EditInterviewsFragment : Fragment()
         btnEndTime!!.setOnClickListener { endTimeDialog.show() }
 
         btnAddToCalendar.setOnClickListener {
-            val acp = AndroidCalendarProvider(activity)
+            val acp = AndroidCalendarProvider(activity!!)
 
             if (startDateTime != null && endDateTime != null)
             {

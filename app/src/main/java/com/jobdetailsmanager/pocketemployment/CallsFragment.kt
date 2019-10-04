@@ -20,10 +20,10 @@ import android.app.Activity
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTabHost
-import android.support.v4.widget.CursorAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTabHost
+import androidx.cursoradapter.widget.CursorAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,17 +41,17 @@ open class CallsFragment : Fragment()
     //@BindView(R.id.tabHost)
     internal var tabHost: FragmentTabHost? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         val view = inflater!!.inflate(R.layout.fragment_tab_host, container, false)
         //ButterKnife.bind(this, view)
 
         val intent = Intent(activity, RecruiterCallService::class.java)
-        activity.startService(intent)
+        activity?.startService(intent)
 
         //childFragmentManager = this.getChildFragmentManager()
 
-        tabHost!!.setup(activity, childFragmentManager, android.R.id.tabcontent)
+        tabHost!!.setup(activity!!, childFragmentManager, android.R.id.tabcontent)
         tabHost!!.addTab(tabHost!!.newTabSpec("today").setIndicator("Today"), CallsTodayFragment::class.java, null)
         tabHost!!.addTab(tabHost!!.newTabSpec("thisWeek").setIndicator("This Week"), CallsThisWeekFragment::class.java, null)
         tabHost!!.addTab(tabHost!!.newTabSpec("thisMonth").setIndicator("This Month"), CallsThisMonthFragment::class.java, null)
@@ -59,7 +59,7 @@ open class CallsFragment : Fragment()
         return view
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
     }
@@ -86,7 +86,7 @@ open class CallsFragment : Fragment()
         {
             val drawerIndex = args.getInt("drawer_position")
             val drawerSelection = resources.getStringArray(R.array.drawer_items)[drawerIndex]
-            activity.title = drawerSelection
+            activity?.title = drawerSelection
         }
 
     }

@@ -17,10 +17,10 @@ package com.jobdetailsmanager.pocketemployment
 
 import android.database.Cursor
 import android.os.Bundle
-import android.support.v4.app.ListFragment
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.CursorLoader
-import android.support.v4.content.Loader
+import androidx.fragment.app.ListFragment
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.CursorLoader
+import androidx.loader.content.Loader
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,7 +51,7 @@ class InterviewsTodayFragment : ListFragment(), LoaderManager.LoaderCallbacks<Cu
         try
         {
             //listAdapter = new InterviewsCursorAdapter(getActivity(), null);
-            listAdapter = CallsCursorAdapter(activity, null)
+            listAdapter = CallsCursorAdapter(activity!!, null)
         }
         catch (ex: Exception)
         {
@@ -62,18 +62,18 @@ class InterviewsTodayFragment : ListFragment(), LoaderManager.LoaderCallbacks<Cu
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
 
 
         return inflater!!.inflate(R.layout.fragment_lv_interviews, container, false)
     }
 
-    override fun onCreateLoader(id: Int, args: Bundle): Loader<Cursor>?
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor>
     {
-        gcp = AndroidCalendarProvider(activity)
+        gcp = AndroidCalendarProvider(activity!!)
         cursorLoader = gcp!!.eventsTodayCursorLoader
-        return cursorLoader
+        return cursorLoader!!
 
     }
 
@@ -189,7 +189,7 @@ class InterviewsTodayFragment : ListFragment(), LoaderManager.LoaderCallbacks<Cu
         //
         //            }
         //        });
-        val tvInterviewTitle = activity.findViewById<View>(R.id.tvInterviewType) as TextView
+        val tvInterviewTitle = activity?.findViewById<View>(R.id.tvInterviewType) as TextView
 
         //if (tvInterviewTitle.getText())
     }

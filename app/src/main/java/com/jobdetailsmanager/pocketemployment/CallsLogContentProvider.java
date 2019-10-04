@@ -17,9 +17,10 @@ package com.jobdetailsmanager.pocketemployment;
 
 import android.content.Context;
 import android.provider.CallLog;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.util.ArrayMap;
 import android.util.Log;
+
+import androidx.collection.ArrayMap;
+import androidx.loader.content.CursorLoader;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -27,8 +28,6 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import greendao.Contact;
 
 
 public class CallsLogContentProvider
@@ -78,58 +77,58 @@ public class CallsLogContentProvider
     }
 
 
-    public ArrayMap<String, List<Contact>> groupByDateCallsLog(List<CallRow> callRows)
-    {
-        List<Contact> fetchDates = new ArrayList<>();
-
-        ArrayMap<String, List<Contact>> recruiterContactDates = new ArrayMap<>();
-
-        //TODO: Fix callRows null
-        CallRow tempCallRow = callRows.get(0);
-
-        for (CallRow currentCallRow : callRows)
-        {
-            try
-            {
-                DateTime tempCallDate = tempCallRow.getCallDate();
-                DateTime currentDateTime = currentCallRow.getCallDate();
-
-                DateTimeFormatter format = DateTimeFormat.fullDate();
-
-                if (format.print(tempCallDate).equals(format.print(currentDateTime)))
-                {
-                    Contact contact = new Contact();
-                    contact.setDateCallReceived(currentDateTime.toString());
-                    contact.setContactPhoneNumber(currentCallRow.getPhoneNumber());
-                    contact.setContactType(currentCallRow.getCallType());
-                    fetchDates.add(contact);
-                    //fetchDates.add(currentCallRow.getCallDate().toLocalTime().toString("hh:mm:ss"));
-                }
-                else
-                {
-                    if (!fetchDates.isEmpty())
-                    {
-                        recruiterContactDates.put(currentDateTime.toString(), fetchDates);
-                        fetchDates = new ArrayList<>();
-                    }
-                    //since the calls row dates don't match, update temporary variable for comparison to next call row
-                    tempCallRow = currentCallRow;
-                }
-
-                if (recruiterContactDates.size() == 0 && !fetchDates.isEmpty())
-                {
-                    recruiterContactDates.put(currentDateTime.toString(), fetchDates);
-                }
-
-            }
-            catch(Exception ex)
-            {
-                ex.printStackTrace();
-            }
-        }
-
-        return recruiterContactDates;
-    }
+//    public ArrayMap<String, List<Contact>> groupByDateCallsLog(List<CallRow> callRows)
+//    {
+//        List<Contact> fetchDates = new ArrayList<>();
+//
+//        ArrayMap<String, List<Contact>> recruiterContactDates = new ArrayMap<>();
+//
+//        //TODO: Fix callRows null
+//        CallRow tempCallRow = callRows.get(0);
+//
+//        for (CallRow currentCallRow : callRows)
+//        {
+//            try
+//            {
+//                DateTime tempCallDate = tempCallRow.getCallDate();
+//                DateTime currentDateTime = currentCallRow.getCallDate();
+//
+//                DateTimeFormatter format = DateTimeFormat.fullDate();
+//
+//                if (format.print(tempCallDate).equals(format.print(currentDateTime)))
+//                {
+//                    Contact contact = new Contact();
+//                    contact.setDateCallReceived(currentDateTime.toString());
+//                    contact.setContactPhoneNumber(currentCallRow.getPhoneNumber());
+//                    contact.setContactType(currentCallRow.getCallType());
+//                    fetchDates.add(contact);
+//                    //fetchDates.add(currentCallRow.getCallDate().toLocalTime().toString("hh:mm:ss"));
+//                }
+//                else
+//                {
+//                    if (!fetchDates.isEmpty())
+//                    {
+//                        recruiterContactDates.put(currentDateTime.toString(), fetchDates);
+//                        fetchDates = new ArrayList<>();
+//                    }
+//                    //since the calls row dates don't match, update temporary variable for comparison to next call row
+//                    tempCallRow = currentCallRow;
+//                }
+//
+//                if (recruiterContactDates.size() == 0 && !fetchDates.isEmpty())
+//                {
+//                    recruiterContactDates.put(currentDateTime.toString(), fetchDates);
+//                }
+//
+//            }
+//            catch(Exception ex)
+//            {
+//                ex.printStackTrace();
+//            }
+//        }
+//
+//        return recruiterContactDates;
+//    }
 
     public CursorLoader getCallsThisWeek()
     {

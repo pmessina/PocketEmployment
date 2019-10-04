@@ -16,7 +16,7 @@
 package com.jobdetailsmanager.pocketemployment
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,11 +32,6 @@ import org.greenrobot.greendao.query.QueryBuilder
 import java.util.ArrayList
 import java.util.Arrays
 
-import greendao.Contact
-import greendao.ContactDao
-import greendao.DaoSession
-import greendao.Interview
-import greendao.InterviewDao
 
 class TodoListFragment : Fragment()
 {
@@ -44,7 +39,7 @@ class TodoListFragment : Fragment()
 
     val helper:GreenDaoHelper by kodein.instance()
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         // Inflate the layout for this fragment
         return inflater!!.inflate(R.layout.fragment_todo_list, container, false)
@@ -59,7 +54,7 @@ class TodoListFragment : Fragment()
         {
             val drawerIndex = args.getInt("drawer_position")
             val drawerSelection = resources.getStringArray(R.array.drawer_items)[drawerIndex]
-            activity.title = drawerSelection
+            activity?.title = drawerSelection
         }
 
         val numInterviews: Long = 0
@@ -69,30 +64,30 @@ class TodoListFragment : Fragment()
         //        {
 
 
-        val session = helper.initSession()
+        //val session = helper.initSession()
 
 
-        val contacts = session.contactDao
-        val queryContacts = contacts.queryBuilder().where(ContactDao.Properties.ContactFirstName.isNull, ContactDao.Properties.ContactLastName.isNull)
+//        val contacts = session.contactDao
+//        val queryContacts = contacts.queryBuilder().where(ContactDao.Properties.ContactFirstName.isNull, ContactDao.Properties.ContactLastName.isNull)
+//
+//        val numberNullNames = queryContacts.count()
+//
+//        val interviewDao = session.interviewDao
+//
+//        val queryInterviews = interviewDao.queryBuilder()
+//
+//        val numberInterviews = queryInterviews.count()
+//
+//        val numInterviewsMessage = "You have $numberInterviews interviews"
 
-        val numberNullNames = queryContacts.count()
 
-        val interviewDao = session.interviewDao
-
-        val queryInterviews = interviewDao.queryBuilder()
-
-        val numberInterviews = queryInterviews.count()
-
-        val numInterviewsMessage = "You have $numberInterviews interviews"
-
-
-        val numNamesToFill = "You have $numberNullNames numbers with unknown names"
+//        val numNamesToFill = "You have $numberNullNames numbers with unknown names"
 
         val numbersWithoutNames = ArrayList<String>()
-        for (c in queryContacts.build().list())
-        {
-            numbersWithoutNames.add(c.contactPhoneNumber)
-        }
+//        for (c in queryContacts.build().list())
+//        {
+//            numbersWithoutNames.add(c.contactPhoneNumber)
+//        }
         //
         //            numInterviews = interviewQuery.count();
 
@@ -104,7 +99,7 @@ class TodoListFragment : Fragment()
         //        }
 
         //Populate Interviews listview
-        val todoListView = activity.findViewById<View>(R.id.expListViewTodoList) as ExpandableListView
+        val todoListView = activity?.findViewById<View>(R.id.expListViewTodoList) as ExpandableListView
 
 
         todoListView.setOnChildClickListener(object : ExpandableListView.OnChildClickListener
@@ -123,17 +118,17 @@ class TodoListFragment : Fragment()
         })
 
 
-        val todoListExpListAdapter = TodoListExpListAdapter(activity)
+        val todoListExpListAdapter = TodoListExpListAdapter(activity!!)
         val calls = resources.getStringArray(R.array.calls)
         val interviews = resources.getStringArray(R.array.interviews)
         val jobPositions = resources.getStringArray(R.array.job_positions)
         val staffingCompanies = resources.getStringArray(R.array.staffing_companies)
         val recruiters = resources.getStringArray(R.array.recruiters)
 
-        todoListExpListAdapter.addListDataHeader(numNamesToFill)
-        todoListExpListAdapter.addListDataChild(numNamesToFill, numbersWithoutNames)
-
-        todoListExpListAdapter.addListDataHeader(numInterviewsMessage)
+//        todoListExpListAdapter.addListDataHeader(numNamesToFill)
+//        todoListExpListAdapter.addListDataChild(numNamesToFill, numbersWithoutNames)
+//
+//        todoListExpListAdapter.addListDataHeader(numInterviewsMessage)
         todoListExpListAdapter.addListDataChild(interviews[0], Arrays.asList(interviews[1]))
 
         todoListExpListAdapter.addListDataHeader(staffingCompanies[0])
@@ -153,7 +148,7 @@ class TodoListFragment : Fragment()
             if (child === recruiters[1])
             {
 
-                activity.supportFragmentManager.inTransaction {
+                activity?.supportFragmentManager?.inTransaction {
                     replace(R.id.drawer_layout_container, JobContactDetailsFragment())
                 }
                 //PocketEmploymentTodoList.setFragment(new JobContactDetailsFragment());

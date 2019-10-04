@@ -20,11 +20,12 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import android.preference.PreferenceManager
-import android.support.v4.app.TaskStackBuilder
+import androidx.core.app.TaskStackBuilder
 import android.telephony.PhoneNumberUtils
 import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
@@ -39,8 +40,6 @@ import org.joda.time.DateTime
 
 import java.util.Locale
 
-import greendao.Contact
-import greendao.ContactDao
 
 
 //val callsNotificationManager = Kodein.Module{
@@ -108,7 +107,7 @@ class RecruiterCallService : Service()
             internal var ring = false
             internal var callReceived = false
 
-            @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.M)
+            @androidx.annotation.RequiresApi(api = Build.VERSION_CODES.M)
             override fun onCallStateChanged(state: Int, incomingNumber: String?)
             {
                 super.onCallStateChanged(state, incomingNumber)
@@ -163,7 +162,7 @@ class RecruiterCallService : Service()
 
                     val formattedPhoneNumber = PhoneNumberUtils.formatNumber(incomingNumber, Locale.getDefault().country)
 
-                    callsNotificationManager!!.setDialogNotification(0, "Add $formattedPhoneNumber to contacts?", yesPendingIntent, noPendingIntent)
+                    callsNotificationManager.setDialogNotification(0, "Add $formattedPhoneNumber to contacts?", yesPendingIntent!!, noPendingIntent!!)
 
 
                     callReceived = true
@@ -218,31 +217,31 @@ class RecruiterCallService : Service()
                 val greenDaoHelper = GreenDaoHelper(context)
 
 
-                val contactDao = greenDaoHelper.initSession().contactDao
+                //val contactDao = greenDaoHelper.initSession().contactDao
 
-                val queryContact = contactDao.queryBuilder().where(ContactDao.Properties.ContactPhoneNumber.eq(incomingNumber))
+                //val queryContact = contactDao.queryBuilder().where(ContactDao.Properties.ContactPhoneNumber.eq(incomingNumber))
 
 
-                if (queryContact.list().isEmpty())
-                {
-                    val contact = Contact()
-
-                    contact.contactPhoneNumber = incomingNumber
-                    contact.dateCallReceived = DateTime.now().toString()
-                    contact.contactCallState = RecruiterCallState.INITIAL_CALL.value
-
-                    Log.i("Contact", contact.toString())
-
-                    contactDao.insert(contact)
-
-                    greenDaoHelper.closeSession()
-
-                    Toast.makeText(context, incomingNumber!! + " stored in database", Toast.LENGTH_LONG).show()
-
-                } else
-                {
-                    Toast.makeText(context, incomingNumber!! + " exists in database", Toast.LENGTH_LONG).show()
-                }
+//                if (queryContact.list().isEmpty())
+//                {
+//                    val contact = Contact()
+//
+//                    contact.contactPhoneNumber = incomingNumber
+//                    contact.dateCallReceived = DateTime.now().toString()
+//                    contact.contactCallState = RecruiterCallState.INITIAL_CALL.value
+//
+//                    Log.i("Contact", contact.toString())
+//
+//                    contactDao.insert(contact)
+//
+//                    greenDaoHelper.closeSession()
+//
+//                    Toast.makeText(context, incomingNumber!! + " stored in database", Toast.LENGTH_LONG).show()
+//
+//                } else
+//                {
+//                    Toast.makeText(context, incomingNumber!! + " exists in database", Toast.LENGTH_LONG).show()
+//                }
             }
             catch (e: Exception)
             {
@@ -259,6 +258,6 @@ class RecruiterCallService : Service()
 
         //        CallsNotificationManager.Companion.getInstance(this).stopNotification(1);
         //        CallsNotificationManager.Companion.getInstance(this).stopNotification(2);
-        super.onDestroy()
+
     }
 }

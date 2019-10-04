@@ -17,9 +17,9 @@ package com.jobdetailsmanager.pocketemployment
 
 import android.database.Cursor
 import android.os.Bundle
-import android.support.v4.app.ListFragment
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.Loader
+import androidx.fragment.app.ListFragment
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.Loader
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +30,7 @@ class InterviewsThisMonthFragment : ListFragment(), LoaderManager.LoaderCallback
     //private val listView: ListView? = null
     private var gcp: AndroidCalendarProvider? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         return inflater!!.inflate(R.layout.fragment_lv_interviews, container, false)
     }
@@ -44,16 +44,16 @@ class InterviewsThisMonthFragment : ListFragment(), LoaderManager.LoaderCallback
         //listView = (ListView)getActivity().findViewById(R.id.interviews_listview);
     }
 
-    override fun onCreateLoader(id: Int, args: Bundle): Loader<Cursor>
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor>
     {
-        gcp = AndroidCalendarProvider(activity)
+        gcp = AndroidCalendarProvider(activity!!)
 
         return gcp!!.eventsCurrentMonthCursorLoader
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, cursor: Cursor)
     {
-        listAdapter = InterviewsCursorAdapter(activity, cursor)
+        listAdapter = InterviewsCursorAdapter(activity!!, cursor)
 
         setListAdapter(listAdapter)
         //setUpListView(gcp, listView, cursor, listAdapter);

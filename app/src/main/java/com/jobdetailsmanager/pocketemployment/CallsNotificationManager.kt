@@ -25,9 +25,10 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.Icon
 import android.os.Build
-import android.support.annotation.RequiresApi
-import android.support.v7.app.NotificationCompat
+import androidx.annotation.RequiresApi
+
 import android.widget.RemoteViews
+import androidx.core.app.NotificationCompat
 
 class CallsNotificationManager(val context: Context)
 {
@@ -38,7 +39,7 @@ class CallsNotificationManager(val context: Context)
     internal lateinit var notificationData: String
 
     init {
-        notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+        notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
 
 //    private constructor(context: Context, notificationData: String)

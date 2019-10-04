@@ -17,13 +17,11 @@ package com.jobdetailsmanager.pocketemployment
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import greendao.Employer
-import greendao.EmployerDao
 
 class EditEmployersFragment : Fragment()
 {
@@ -38,13 +36,13 @@ class EditEmployersFragment : Fragment()
 
         //Dao<Employer, Integer> employerDao = helper.getEmployerDao();
 
-        val greenDaoHelper = GreenDaoHelper(activity)
-        val employerDao = greenDaoHelper.initSession().employerDao
+        val greenDaoHelper = GreenDaoHelper(activity!!)
+        //val employerDao = greenDaoHelper.initSession().employerDao
 
-        val employer = Employer()
-        employerDao.insert(employer)
+//        val employer = Employer()
+//        employerDao.insert(employer)
 
-        greenDaoHelper.closeSession()
+        //greenDaoHelper.closeSession()
 
     }
 
@@ -63,9 +61,9 @@ class EditEmployersFragment : Fragment()
     //    Log.i("SQL Update", updateContact.prepareStatementInfo().getStatement());
     //
     //    contactDao.update(updateContact.prepare());
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
-        return inflater!!.inflate(R.layout.fragment_edit_employers, container, false)
+        return inflater.inflate(R.layout.fragment_edit_employers, container, false)
     }
 
 }

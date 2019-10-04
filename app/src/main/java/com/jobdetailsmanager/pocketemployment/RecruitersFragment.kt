@@ -19,17 +19,15 @@ package com.jobdetailsmanager.pocketemployment
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.LocalBroadcastManager
-import android.support.v4.util.ArrayMap
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.collection.ArrayMap
+import androidx.recyclerview.widget.RecyclerView
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.ExpandableListView
 import android.widget.TextView
 import android.widget.Toast
-import greendao.Contact
-import greendao.ContactDao
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView
 import java.util.*
 
@@ -40,9 +38,9 @@ class RecruitersFragment : Fragment() //implements ServiceConnection
 
     internal var lastExpandedPosition = -1
 
-    internal var expListAdapter: RecruiterCallsExpListAdapter<*>? = null
+    //internal var expListAdapter: RecruiterCallsExpListAdapter<*>? = null
 
-    internal var queryDatesFromContacts: List<Contact>? = null
+    //internal var queryDatesFromContacts: List<Contact>? = null
 
     private var isRecruiter: Boolean = false
 
@@ -54,7 +52,7 @@ class RecruitersFragment : Fragment() //implements ServiceConnection
 
     private val broadcaster: LocalBroadcastManager? = null
 
-    internal var contactArrayAdapter: ArrayAdapter<Contact>? = null
+    //internal var contactArrayAdapter: ArrayAdapter<Contact>? = null
 
     //    @BindView(R.id.expListView)
     //    ExpandableListView expListView;
@@ -89,16 +87,14 @@ class RecruitersFragment : Fragment() //implements ServiceConnection
     //    }
 
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
-    {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.activity_recruiter_calls, container, false)
 
         val args = this.arguments
-        if (args != null)
-        {
+        if (args != null) {
             val drawerIndex = args.getInt("drawer_position")
             val drawerSelection = resources.getStringArray(R.array.drawer_items)[drawerIndex]
-            activity.title = drawerSelection
+            activity!!.title = drawerSelection
         }
 
         this.setHasOptionsMenu(true)
@@ -106,24 +102,23 @@ class RecruitersFragment : Fragment() //implements ServiceConnection
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?)
-    {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         //Intent intent = new Intent(getActivity(), RecruiterCallService.class);
 
         //getActivity().bindService(intent, this, Context.BIND_AUTO_CREATE);
 
-        val greenDaoHelper = GreenDaoHelper(activity)
+        val greenDaoHelper = GreenDaoHelper(activity!!)
 
         //        RecruiterDao recruiterDao = greenDaoHelper.initSession().getRecruiterDao();
-        val contactDao = greenDaoHelper.initSession().contactDao
+        //val contactDao = greenDaoHelper.initSession().contactDao
 
         //QueryBuilder<Contact, Integer> queryBuilder = contactDao.queryBuilder();
 
         //        List<Recruiter> queryFromRecruiters = recruiterDao.loadAll();
 
-        val queryFromContacts = contactDao.loadAll()
+        //val queryFromContacts = contactDao.loadAll()
 
         //        queryFromContacts.addAll(queryFromRecruiters);
 
@@ -152,9 +147,9 @@ class RecruitersFragment : Fragment() //implements ServiceConnection
         //        rvViewContacts.setHasFixedSize(true);
 
 
-        val stickyListHeadersAdapter = ViewContactsStickyListAdapter(activity, queryFromContacts)
-
-        stickyListHeadersListView!!.setAdapter(stickyListHeadersAdapter)
+//        val stickyListHeadersAdapter = ViewContactsStickyListAdapter(activity!!, queryFromContacts)
+//
+//        stickyListHeadersListView!!.setAdapter(stickyListHeadersAdapter)
 
 
         //        expListAdapter = new RecruiterCallsExpListAdapter<>(getActivity(), recruiterContactKeys, recruiterContactDates);
@@ -186,47 +181,45 @@ class RecruitersFragment : Fragment() //implements ServiceConnection
         //View view = LayoutInflater.from(this.getActivity()).inflate(R.layout.recruiter_contact_info)
         //easyHeaderFooterAdapter.setHeader();
 
-        dialogManager = DialogManager(activity)
+        dialogManager = DialogManager(activity!!)
 
     }
 
 
-    private inner class MyRecyclerAdapter<T : Contact>(private val contacts: List<T>) : RecyclerView.Adapter<ContactsViewHolder>()
-    {
+//    private inner class MyRecyclerAdapter<T : Contact>(private val contacts: List<T>) : RecyclerView.Adapter<ContactsViewHolder>()
+//    {
+//
+//        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactsViewHolder
+//        {
+//            val view = LayoutInflater.from(parent.context).inflate(R.layout.recruiter_contact_info, parent, false)
+//
+//            return ContactsViewHolder(view)
+//        }
+//
+//        override fun onBindViewHolder(holder: ContactsViewHolder, position: Int)
+//        {
+//            val curContact = contacts[position]
+//
+//            Toast.makeText(activity, curContact.toString(), Toast.LENGTH_LONG).show()
+//
+//            holder.callDate.text = curContact.dateCallReceived
+//            holder.callName.text = curContact.contactFirstName
+//            holder.callPhoneNumber.text = curContact.contactPhoneNumber
+//
+//        }
+//
+//        override fun getItemCount(): Int
+//        {
+//            return contacts.size
+//        }
+//    }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactsViewHolder
-        {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.recruiter_contact_info, parent, false)
-
-            return ContactsViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ContactsViewHolder, position: Int)
-        {
-            val curContact = contacts[position]
-
-            Toast.makeText(activity, curContact.toString(), Toast.LENGTH_LONG).show()
-
-            holder.callDate.text = curContact.dateCallReceived
-            holder.callName.text = curContact.contactFirstName
-            holder.callPhoneNumber.text = curContact.contactPhoneNumber
-
-        }
-
-        override fun getItemCount(): Int
-        {
-            return contacts.size
-        }
-    }
-
-    inner class ContactsViewHolder(rootView: View) : RecyclerView.ViewHolder(rootView)
-    {
+    inner class ContactsViewHolder(rootView: View) : RecyclerView.ViewHolder(rootView) {
         val callName: TextView
         val callPhoneNumber: TextView
         val callDate: TextView
 
-        init
-        {
+        init {
             callName = rootView.findViewById<View>(R.id.tvName) as TextView
             callPhoneNumber = rootView.findViewById<View>(R.id.tvPhoneNumber) as TextView
             callDate = rootView.findViewById<View>(R.id.tvTime) as TextView
@@ -234,61 +227,55 @@ class RecruitersFragment : Fragment() //implements ServiceConnection
     }
 
 
-    override fun onResume()
-    {
+    override fun onResume() {
         super.onResume()
 
         //populateExpandableListView();
     }
 
-    fun populateExpandableListView()
-    {
+    fun populateExpandableListView() {
         //getActivity().registerForContextMenu(expListView);
 
-        try
-        {
+        try {
             //DatabaseHelper helper = OpenHelperManager.getHelper(getActivity(), DatabaseHelper.class);
-            val greenDaoHelper = GreenDaoHelper(activity)
+            val greenDaoHelper = GreenDaoHelper(activity!!)
 
-            val contactDao = greenDaoHelper.initSession().contactDao
+            //val contactDao = greenDaoHelper.initSession().contactDao
 
             //QueryBuilder<Contact, Integer> queryBuilder = contactDao.queryBuilder();
 
-            queryDatesFromContacts = contactDao.loadAll() //contactDao.query(queryBuilder.prepare());
+            //queryDatesFromContacts = contactDao.loadAll() //contactDao.query(queryBuilder.prepare());
 
-            val recruiterContactDates = ArrayMap<String, List<Contact>>()
+            //val recruiterContactDates = ArrayMap<String, List<Contact>>()
 
-            val dateTimes = TreeSet(ContactsComparator.invoke())
+//            val dateTimes = TreeSet(ContactsComparator.invoke())
+//
+//            for (c in queryDatesFromContacts!!) {
+//                dateTimes.add(c)
+//            }
 
-            for (c in queryDatesFromContacts!!)
-            {
-                dateTimes.add(c)
-            }
+            //val queryDate = contactDao.queryBuilder()
 
-            val queryDate = contactDao.queryBuilder()
+//            for (date in dateTimes) {
+//                val formattedDate = date.dateCallReceived
+//
+//                //FIXME: fix algorithm for sorting contacts by dates
+//                val wc = ContactDao.Properties.DateCallReceived.like("%$formattedDate%")
+//
+//                val contactsList = queryDate.where(wc).build().list()
+//
+//                //Collections.sort(contactsList, Contact())
+//
+//                recruiterContactDates[formattedDate] = contactsList
+//            }
 
-            for (date in dateTimes)
-            {
-                val formattedDate = date.dateCallReceived
-
-                //FIXME: fix algorithm for sorting contacts by dates
-                val wc = ContactDao.Properties.DateCallReceived.like("%$formattedDate%")
-
-                val contactsList = queryDate.where(wc).build().list()
-
-                Collections.sort(contactsList, Contact())
-
-                recruiterContactDates[formattedDate] = contactsList
-            }
-
-            val recruiterContactKeys = ArrayList<String>()
-
-            for (o in recruiterContactDates.keys.toTypedArray())
-            {
-                recruiterContactKeys.add(o.toString())
-            }
-
-            Collections.sort(recruiterContactKeys)
+//            val recruiterContactKeys = ArrayList<String>()
+//
+//            for (o in recruiterContactDates.keys.toTypedArray()) {
+//                recruiterContactKeys.add(o.toString())
+//            }
+//
+//            recruiterContactKeys.sort()
 
             //            expListAdapter = new RecruiterCallsExpListAdapter(getActivity(), recruiterContactKeys, recruiterContactDates);
             //
@@ -333,12 +320,10 @@ class RecruitersFragment : Fragment() //implements ServiceConnection
             //            }
             //        });
 
-            greenDaoHelper.closeSession()
+            //greenDaoHelper.closeSession()
 
             //this.registerForContextMenu(expListView);
-        }
-        catch (e: Exception)
-        {
+        } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
         }
@@ -362,43 +347,35 @@ class RecruitersFragment : Fragment() //implements ServiceConnection
     //        return true;
     //    }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean
-    {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        val greenDaoHelper = GreenDaoHelper(activity)
+        val greenDaoHelper = GreenDaoHelper(activity!!)
 
-        when (item!!.itemId)
-        {
-            R.id.delete_contacts ->
-            {
-                greenDaoHelper.initSession().contactDao.deleteAll()
-                greenDaoHelper.closeSession()
+        when (item.itemId) {
+            R.id.delete_contacts -> {
+//                greenDaoHelper.initSession().contactDao.deleteAll()
+//                greenDaoHelper.closeSession()
                 //TableUtils.clearTable(helper.getConnectionSource(), Contact.class);
                 Toast.makeText(activity, "Delete Succeeded", Toast.LENGTH_LONG).show()
-                if (contactArrayAdapter != null)
-                {
-                    //contactArrayAdapter.clear();
-                    contactArrayAdapter!!.notifyDataSetChanged()
-                }
+//                if (contactArrayAdapter != null) {
+//                    //contactArrayAdapter.clear();
+//                    contactArrayAdapter!!.notifyDataSetChanged()
+//                }
             }
-            R.id.add_contacts ->
-            {
-                if (item.itemId == R.id.add_contacts)
-                {
-                    val contactDao = greenDaoHelper.initSession().contactDao
-
-                    for (cr in RecruiterCallsLogActivity.callRows!!)
-                    {
-                        val contact = Contact()
-                        contact.dateCallReceived = cr.callDate!!.toDateTime().toString()
-                        contact.contactPhoneNumber = cr.phoneNumber
-                        contactDao.insert(contact)
-                        if (contactArrayAdapter != null)
-                        {
-                            contactArrayAdapter!!.notifyDataSetChanged()
-                        }
-
-                    }
+            R.id.add_contacts -> {
+                if (item.itemId == R.id.add_contacts) {
+//                    val contactDao = greenDaoHelper.initSession().contactDao
+////
+////                    for (cr in RecruiterCallsLogActivity.callRows!!) {
+////                        val contact = Contact()
+////                        contact.dateCallReceived = cr.callDate!!.toDateTime().toString()
+////                        contact.contactPhoneNumber = cr.phoneNumber
+////                        contactDao.insert(contact)
+////                        if (contactArrayAdapter != null) {
+////                            contactArrayAdapter!!.notifyDataSetChanged()
+////                        }
+////
+////                    }
 
                 }
             }
@@ -407,53 +384,48 @@ class RecruitersFragment : Fragment() //implements ServiceConnection
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo)
-    {
+    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
 
-        val menuInflater = activity.menuInflater
+        val menuInflater = activity!!.menuInflater
         menuInflater.inflate(R.menu.menu_recruiter_call_information, menu)
     }
 
-    override fun onContextItemSelected(item: MenuItem?): Boolean
-    {
-        val listContextMenuInfo = item!!.menuInfo as ExpandableListView.ExpandableListContextMenuInfo
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val listContextMenuInfo = item.menuInfo as ExpandableListView.ExpandableListContextMenuInfo
 
         val groupPosition = ExpandableListView.getPackedPositionGroup(listContextMenuInfo.packedPosition)
         val childPosition = ExpandableListView.getPackedPositionChild(listContextMenuInfo.packedPosition)
 
-        val contact = expListAdapter!!.getChild(groupPosition, childPosition) as Contact
+        //val contact = expListAdapter!!.getChild(groupPosition, childPosition) as Contact
 
 
-        val dialog = AlertDialog.Builder(activity).setTitle("Recruiter?").setMessage("Are you sure you want to delete " + contact.formattedRecruiterPhoneNumber + "?").setPositiveButton("Yes") { dialog, which ->
-                    val greenDaoHelper = GreenDaoHelper(activity)
-                    val deleteDao = greenDaoHelper.initSession().contactDao
-                    deleteDao.delete(contact)
-                    expListAdapter!!.deleteChild(groupPosition, childPosition)
-                    expListAdapter!!.notifyDataSetChanged()
-
-                    Toast.makeText(activity, "The phone number " + contact.formattedRecruiterPhoneNumber + " was deleted", Toast.LENGTH_LONG).show()
-                }.setNegativeButton("No") { dialog, which -> isRecruiter = false }
-        val ad = dialog.create()
-        ad.show()
+//        val dialog = AlertDialog.Builder(activity).setTitle("Recruiter?").setMessage("Are you sure you want to delete " + contact.formattedRecruiterPhoneNumber + "?").setPositiveButton("Yes") { dialog, which ->
+//            val greenDaoHelper = GreenDaoHelper(activity)
+//            val deleteDao = greenDaoHelper.initSession().contactDao
+//            deleteDao.delete(contact)
+//            expListAdapter!!.deleteChild(groupPosition, childPosition)
+//            expListAdapter!!.notifyDataSetChanged()
+//
+//            Toast.makeText(activity, "The phone number " + contact.formattedRecruiterPhoneNumber + " was deleted", Toast.LENGTH_LONG).show()
+//        }.setNegativeButton("No") { dialog, which -> isRecruiter = false }
+//        val ad = dialog.create()
+//        ad.show()
 
         return super.onContextItemSelected(item)
     }
 
-    override fun onStop()
-    {
+    override fun onStop() {
         super.onStop()
         //getActivity().unregisterForContextMenu(expListView);
     }
 
-    override fun onDestroy()
-    {
+    override fun onDestroy() {
         super.onDestroy()
         //        getActivity().unbindService(this);
     }
 
-    companion object
-    {
+    companion object {
 
         private val NOTIF_ID = 1
     }

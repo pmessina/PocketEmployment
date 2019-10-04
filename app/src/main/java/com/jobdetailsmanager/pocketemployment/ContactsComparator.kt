@@ -20,29 +20,28 @@ import org.joda.time.LocalDate
 
 import java.util.Comparator
 
-import greendao.Contact
 
-class ContactsComparator private constructor() : Comparator<Contact>
-{
-
-    override fun compare(lhs: Contact, rhs: Contact): Int
-    {
-        val localDate = DateTime(lhs.dateCallReceived).toLocalDate()
-        val thisLocalDate = DateTime(rhs.dateCallReceived).toLocalDate()
-
-        return localDate.compareTo(thisLocalDate)
-    }
-
-    private fun parseDate(date: String): LocalDate
-    {
-        return DateTime.parse(date).toLocalDate()
-    }
-
-    companion object
-    {
-        operator fun invoke(): ContactsComparator
-        {
-            return ContactsComparator()
-        }
-    }
-}
+//class ContactsComparator private constructor() : Comparator<Contact>
+//{
+//
+//    override fun compare(lhs: Contact, rhs: Contact): Int
+//    {
+//        val localDate = DateTime(lhs.dateCallReceived).toLocalDate()
+//        val thisLocalDate = DateTime(rhs.dateCallReceived).toLocalDate()
+//
+//        return localDate.compareTo(thisLocalDate)
+//    }
+//
+//    private fun parseDate(date: String): LocalDate
+//    {
+//        return DateTime.parse(date).toLocalDate()
+//    }
+//
+//    companion object
+//    {
+//        operator fun invoke(): ContactsComparator
+//        {
+//            return ContactsComparator()
+//        }
+//    }
+//}

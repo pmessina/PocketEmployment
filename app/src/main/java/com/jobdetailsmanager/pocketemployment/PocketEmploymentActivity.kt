@@ -2,10 +2,10 @@ package com.jobdetailsmanager.pocketemployment
 
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,7 +73,7 @@ class PocketEmploymentActivity : AppCompatActivity() {
     {
         var jobs: List<Jobs> = ArrayList()
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): PositionLocationViewHolder
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PositionLocationViewHolder
         {
             val layoutInflator = LayoutInflater.from(context)
 
@@ -82,10 +82,10 @@ class PocketEmploymentActivity : AppCompatActivity() {
             return PositionLocationViewHolder(view)
         }
 
-        override fun onBindViewHolder(holder: PositionLocationViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: PositionLocationViewHolder, position: Int) {
 
-            holder?.itemView?.tvPosition?.text = jobs[position].position
-            holder?.itemView?.tvLocation?.text = jobs[position].location
+            holder.itemView.tvPosition?.text = jobs[position].position
+            holder.itemView.tvLocation?.text = jobs[position].location
         }
 
         override fun getItemCount(): Int {

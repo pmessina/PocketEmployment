@@ -18,26 +18,15 @@ package com.jobdetailsmanager.pocketemployment
 import android.Manifest
 import android.accounts.AccountManager
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.provider.CalendarContract
-import android.support.annotation.StringRes
-import android.support.v4.content.CursorLoader
-import android.support.v4.util.ArrayMap
-import android.util.Log
-import android.widget.Toast
-import greendao.Interview
+import androidx.loader.content.CursorLoader
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
-import org.joda.time.LocalDate
 import permissions.dispatcher.NeedsPermission
-import permissions.dispatcher.OnShowRationale
-import permissions.dispatcher.PermissionRequest
-import permissions.dispatcher.RuntimePermissions
-import java.util.*
 
 
 //TODO: Make sure runtime permissions are handled by the caller
@@ -46,7 +35,7 @@ class AndroidCalendarProvider(internal var context: Context)
 
     //DatabaseHelper helper;
 
-    internal var helper: GreenDaoHelper? = null
+    //internal var helper: GreenDaoHelper? = null
 
     internal var cursor: Cursor? = null
 
@@ -91,45 +80,45 @@ class AndroidCalendarProvider(internal var context: Context)
             return accounts[0].name
         }
 
-    fun fillInterviewDB(cursor: Cursor)
-    {
-        cursor.moveToFirst()
+//    fun fillInterviewDB(cursor: Cursor)
+//    {
+//        cursor.moveToFirst()
+//
+//        while (cursor.moveToNext())
+//        {
+//            val interview = Interview()
+//            //            try
+//            //            {
+//            interview.interviewType = cursor.getString(cursor.getColumnIndex(eventTitle))
+//            interview.description = cursor.getString(cursor.getColumnIndex(eventDescription))
+//            interview.startTime = cursor.getString(cursor.getColumnIndex(eventStartCol))
+//            interview.endTime = cursor.getString(cursor.getColumnIndex(eventEndCol))
+//
+//            helper!!.initSession().interviewDao.insert(interview)
+//
+//            //            }
+//            //            catch (SQLException ex)
+//            //            {
+//            //                ex.printStackTrace();
+//            //                Toast.makeText(context, ex.getMessage(), Toast.LENGTH_LONG).show();
+//            //            }
+//        }
+//
+//    }
 
-        while (cursor.moveToNext())
-        {
-            val interview = Interview()
-            //            try
-            //            {
-            interview.interviewType = cursor.getString(cursor.getColumnIndex(eventTitle))
-            interview.description = cursor.getString(cursor.getColumnIndex(eventDescription))
-            interview.startTime = cursor.getString(cursor.getColumnIndex(eventStartCol))
-            interview.endTime = cursor.getString(cursor.getColumnIndex(eventEndCol))
-
-            helper!!.initSession().interviewDao.insert(interview)
-
-            //            }
-            //            catch (SQLException ex)
-            //            {
-            //                ex.printStackTrace();
-            //                Toast.makeText(context, ex.getMessage(), Toast.LENGTH_LONG).show();
-            //            }
-        }
-
-    }
-
-    fun fillInterviewFromCursor(cursor: Cursor, position: Int): Interview
-    {
-        cursor.moveToPosition(position)
-
-        val interview = Interview()
-
-        interview.interviewType = cursor.getString(cursor.getColumnIndex(eventTitle))
-        interview.description = cursor.getString(cursor.getColumnIndex(eventDescription))
-        interview.startTime = cursor.getString(cursor.getColumnIndex(eventStartCol))
-        interview.endTime = cursor.getString(cursor.getColumnIndex(eventEndCol))
-
-        return interview
-    }
+//    fun fillInterviewFromCursor(cursor: Cursor, position: Int): Interview
+//    {
+//        cursor.moveToPosition(position)
+//
+//        val interview = Interview()
+//
+//        interview.interviewType = cursor.getString(cursor.getColumnIndex(eventTitle))
+//        interview.description = cursor.getString(cursor.getColumnIndex(eventDescription))
+//        interview.startTime = cursor.getString(cursor.getColumnIndex(eventStartCol))
+//        interview.endTime = cursor.getString(cursor.getColumnIndex(eventEndCol))
+//
+//        return interview
+//    }
 
 
     //Get all interview calendar events in a week that have the title with "Interview" in them
@@ -208,66 +197,66 @@ class AndroidCalendarProvider(internal var context: Context)
     }
 
     //Get all interview calendar events in a week that have the title with "Interview" in them
-    fun getCalendarEvents(startTime: DateTime, endTime: DateTime): List<Interview>
-    {
-        val cr = context.contentResolver
-
-        val projection = arrayOf(calId, eventTitle, eventStartCol, eventEndCol, eventDescription)
-
-        val query = StringBuilder()
-        query.append(eventStartCol).append(" BETWEEN ")
-        query.append(startTime.millis).append(" AND ")
-        query.append(endTime.millis).append(" AND ")
-        query.append(eventAllDay + " = 0").append(" AND ")
-        query.append(eventTitle).append(" LIKE ?")
-
-        val results = ArrayList<Interview>()
-
-        val arguments = arrayOf("%interview%")
-
-        cursor = cr.query(calendarUri, projection, query.toString(), arguments, eventStartCol + " ASC")
-
-        try
-        {
-            Log.i("Cursor Query", "Cursor returned " + cursor!!.count + " rows")
-
-            while (cursor!!.moveToNext())
-            {
-                //Interview acts as a holder, will not be persisted to database
-                val interview = Interview()
-                val eventStart = cursor!!.getString(cursor!!.getColumnIndex(eventStartCol))
-
-                val startTimeDT = DateTime(java.lang.Long.parseLong(eventStart))
-                interview.startTime = startTimeDT.toString()
-
-                val eventEnd = cursor!!.getString(cursor!!.getColumnIndex(eventEndCol))
-                val endTimeDT = DateTime(java.lang.Long.parseLong(eventEnd))
-                interview.endTime = endTimeDT.toString()
-
-                val eventTitleName = cursor!!.getString(cursor!!.getColumnIndex(eventTitle))
-                interview.interviewType = eventTitleName
-
-                val eventDescriptionCol = cursor!!.getString(cursor!!.getColumnIndex(eventDescription))
-                interview.description = eventDescriptionCol
-
-                results.add(interview)
-            }
-
-            //cursor.closeSession();
-
-        }
-        catch (ex: Exception)
-        {
-            if (!cursor!!.isClosed)
-            {
-                cursor!!.close()
-            }
-            ex.printStackTrace()
-            Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
-        }
-
-        return results
-    }
+//    fun getCalendarEvents(startTime: DateTime, endTime: DateTime): List<Interview>
+//    {
+//        val cr = context.contentResolver
+//
+//        val projection = arrayOf(calId, eventTitle, eventStartCol, eventEndCol, eventDescription)
+//
+//        val query = StringBuilder()
+//        query.append(eventStartCol).append(" BETWEEN ")
+//        query.append(startTime.millis).append(" AND ")
+//        query.append(endTime.millis).append(" AND ")
+//        query.append(eventAllDay + " = 0").append(" AND ")
+//        query.append(eventTitle).append(" LIKE ?")
+//
+//        val results = ArrayList<Interview>()
+//
+//        val arguments = arrayOf("%interview%")
+//
+//        cursor = cr.query(calendarUri, projection, query.toString(), arguments, eventStartCol + " ASC")
+//
+//        try
+//        {
+//            Log.i("Cursor Query", "Cursor returned " + cursor!!.count + " rows")
+//
+//            while (cursor!!.moveToNext())
+//            {
+//                //Interview acts as a holder, will not be persisted to database
+//                val interview = Interview()
+//                val eventStart = cursor!!.getString(cursor!!.getColumnIndex(eventStartCol))
+//
+//                val startTimeDT = DateTime(java.lang.Long.parseLong(eventStart))
+//                interview.startTime = startTimeDT.toString()
+//
+//                val eventEnd = cursor!!.getString(cursor!!.getColumnIndex(eventEndCol))
+//                val endTimeDT = DateTime(java.lang.Long.parseLong(eventEnd))
+//                interview.endTime = endTimeDT.toString()
+//
+//                val eventTitleName = cursor!!.getString(cursor!!.getColumnIndex(eventTitle))
+//                interview.interviewType = eventTitleName
+//
+//                val eventDescriptionCol = cursor!!.getString(cursor!!.getColumnIndex(eventDescription))
+//                interview.description = eventDescriptionCol
+//
+//                results.add(interview)
+//            }
+//
+//            //cursor.closeSession();
+//
+//        }
+//        catch (ex: Exception)
+//        {
+//            if (!cursor!!.isClosed)
+//            {
+//                cursor!!.close()
+//            }
+//            ex.printStackTrace()
+//            Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
+//        }
+//
+//        return results
+//    }
 
 
     fun setCalendarEvent(beginTime: DateTime, endTime: DateTime, title: String, description: String, eventLocation: String)
@@ -295,22 +284,22 @@ class AndroidCalendarProvider(internal var context: Context)
         cr.insert(CalendarContract.Events.CONTENT_URI, cv)
     }
 
-    fun getEventsGroupByDate(interviews: MutableList<Interview>): ArrayMap<LocalDate, MutableList<Interview>>
-    {
-        val recruiterInterviewDates = ArrayMap<LocalDate, MutableList<Interview>>()
-
-        for (c in interviews)
-        {
-            val localDate = c.interviewDate
-            if (recruiterInterviewDates[localDate] == null)
-            {
-                recruiterInterviewDates[localDate] = mutableListOf()
-            }
-            recruiterInterviewDates[localDate]!!.add(c)
-        }
-
-        return recruiterInterviewDates
-    }
+//    fun getEventsGroupByDate(interviews: MutableList<Interview>): ArrayMap<LocalDate, MutableList<Interview>>
+//    {
+//        val recruiterInterviewDates = ArrayMap<LocalDate, MutableList<Interview>>()
+//
+//        for (c in interviews)
+//        {
+//            val localDate = c.interviewDate
+//            if (recruiterInterviewDates[localDate] == null)
+//            {
+//                recruiterInterviewDates[localDate] = mutableListOf()
+//            }
+//            recruiterInterviewDates[localDate]!!.add(c)
+//        }
+//
+//        return recruiterInterviewDates
+//    }
 
     companion object
     {

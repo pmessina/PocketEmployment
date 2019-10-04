@@ -16,7 +16,7 @@
 package com.jobdetailsmanager.pocketemployment
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +36,7 @@ class JobPositionsFragment : Fragment(), JobPositionsDialogFragment.AddJobPositi
     {
         val fragment = JobPositionsDialogFragment()
 
-        fragment.show(fragmentManager, "jobPositionsDialogFragment")
+        fragment.show(fragmentManager!!, "jobPositionsDialogFragment")
     }
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -46,26 +46,26 @@ class JobPositionsFragment : Fragment(), JobPositionsDialogFragment.AddJobPositi
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
-        val view = inflater!!.inflate(R.layout.fragment_job_positions, container, false)
+        val view = inflater.inflate(R.layout.fragment_job_positions, container, false)
 
         val args = this.arguments
         if (args != null)
         {
             val drawerIndex = args.getInt("drawer_position")
             val drawerSelection = resources.getStringArray(R.array.drawer_items)[drawerIndex]
-            activity.title = drawerSelection
+            activity?.title = drawerSelection
 
             val output = args.getString("data")
             //List<String> data = Arrays.asList(args.getString("data"));
 
-            val greenDaoHelper = GreenDaoHelper(this.activity)
+            val greenDaoHelper = GreenDaoHelper(activity!!)
 
-            val jobTitles = greenDaoHelper.initSession().jobPositionDao.queryBuilder().list()
+            //val jobTitles = greenDaoHelper.initSession().jobPositionDao.queryBuilder().list()
 
-            val adapter = JobPositionsListAdapter(activity, android.R.layout.simple_list_item_1, jobTitles)
-            lvJobPositions!!.adapter = adapter
+            //val adapter = JobPositionsListAdapter(activity!!, android.R.layout.simple_list_item_1, jobTitles)
+            //lvJobPositions!!.adapter = adapter
 
             lvJobPositions!!.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
             {

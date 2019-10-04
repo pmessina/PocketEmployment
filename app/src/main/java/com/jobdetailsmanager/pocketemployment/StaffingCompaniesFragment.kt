@@ -17,7 +17,7 @@ package com.jobdetailsmanager.pocketemployment
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,8 +30,6 @@ import android.widget.Toast
 
 import java.util.ArrayList
 
-import greendao.RecruiterCompany
-import greendao.RecruiterCompanyDao
 
 class StaffingCompaniesFragment : Fragment()
 {
@@ -57,37 +55,37 @@ class StaffingCompaniesFragment : Fragment()
     {
         super.onCreate(savedInstanceState)
 
-        imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
 
         return inflater!!.inflate(R.layout.fragment_staffing_companies, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
         //arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
-        arrayAdapter = StaffingCompaniesListAdapter(activity, android.R.layout.simple_list_item_1)
+        arrayAdapter = StaffingCompaniesListAdapter(activity!!, android.R.layout.simple_list_item_1)
         stringList = ArrayList()
 
-        greenDaoHelper = GreenDaoHelper(this.activity)
-        val recruiterCompanyDao = greenDaoHelper.initSession().recruiterCompanyDao
+        greenDaoHelper = GreenDaoHelper(activity!!)
+        //val recruiterCompanyDao = greenDaoHelper.initSession().recruiterCompanyDao
 
-        val recruiterCompanies = recruiterCompanyDao.queryBuilder().list()
-
-        //TODO: change adapter to add RecruiterCompany instead of String
-        for (recruiterCompany in recruiterCompanies)
-        {
-            arrayAdapter.add(recruiterCompany.recruiterCompanyName)
-        }
+//        val recruiterCompanies = recruiterCompanyDao.queryBuilder().list()
+//
+//        //TODO: change adapter to add RecruiterCompany instead of String
+//        for (recruiterCompany in recruiterCompanies)
+//        {
+//            arrayAdapter.add(recruiterCompany.recruiterCompanyName)
+//        }
 
         listView!!.adapter = arrayAdapter
 
-        greenDaoHelper.closeSession()
+        //greenDaoHelper.closeSession()
 
     }
 
@@ -109,21 +107,21 @@ class StaffingCompaniesFragment : Fragment()
 
             try
             {
-                val recruiterCompanyDao = greenDaoHelper.initSession().recruiterCompanyDao
-                val recruiterCompany = RecruiterCompany()
-                recruiterCompany.recruiterCompanyName = text
-                val insertSuccessful = recruiterCompanyDao.insert(recruiterCompany)
+                //val recruiterCompanyDao = greenDaoHelper.initSession().recruiterCompanyDao
+//                val recruiterCompany = RecruiterCompany()
+//                recruiterCompany.recruiterCompanyName = text
+//                val insertSuccessful = recruiterCompanyDao.insert(recruiterCompany)
+//
+//                if (insertSuccessful > -1)
+//                {
+//                    Toast.makeText(activity, "Recruiter Company added successfully", Toast.LENGTH_SHORT).show()
+//                } else
+//                {
+//                    Toast.makeText(activity, "Failed to insert recruiting company", Toast.LENGTH_SHORT).show()
+//                }
 
-                if (insertSuccessful > -1)
-                {
-                    Toast.makeText(activity, "Recruiter Company added successfully", Toast.LENGTH_SHORT).show()
-                } else
-                {
-                    Toast.makeText(activity, "Failed to insert recruiting company", Toast.LENGTH_SHORT).show()
-                }
 
-
-                greenDaoHelper.closeSession()
+                //greenDaoHelper.closeSession()
             }
             catch (ex: Exception)
             {

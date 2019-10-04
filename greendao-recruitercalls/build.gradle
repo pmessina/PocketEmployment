@@ -5,7 +5,6 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '27.0.3'
 
     defaultConfig {
         minSdkVersion 14
@@ -13,7 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
@@ -40,10 +39,10 @@ greendao {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'com.android.support:appcompat-v7:24.2.1'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'org.greenrobot:greendao:3.2.2'
     implementation 'org.greenrobot:greendao-generator:3.2.2'
     implementation 'org.greenrobot:greendao-api:3.2.2'

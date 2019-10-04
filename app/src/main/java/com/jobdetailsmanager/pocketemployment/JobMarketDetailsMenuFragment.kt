@@ -2,12 +2,12 @@ package com.jobdetailsmanager.pocketemployment
 
 
 import android.os.Bundle
-import android.support.design.widget.TabItem
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentStatePagerAdapter
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
+import com.google.android.material.tabs.TabItem
+import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +29,7 @@ class JobMarketDetailsMenuFragment : Fragment()
 
     lateinit var fragmentPagerAdapter: PagerAdapter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         val view = inflater!!.inflate(R.layout.fragment_job_market_details_menu, container, false)
 
@@ -88,7 +88,7 @@ class JobMarketDetailsMenuFragment : Fragment()
             }
 
 
-            override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any)
+            override fun destroyItem(container: ViewGroup, position: Int, `object`: Any)
             {
                 super.destroyItem(container, position, `object`)
             }

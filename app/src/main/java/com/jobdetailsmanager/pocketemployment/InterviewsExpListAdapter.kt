@@ -29,22 +29,21 @@ import android.widget.TextView
 import java.util.ArrayList
 import java.util.HashMap
 
-import greendao.Interview
 
 class InterviewsExpListAdapter : BaseExpandableListAdapter
 {
     private var context: Context? = null
     private var listDataHeader: MutableList<String>? = null
-    private var listDataChild: HashMap<String, MutableList<Interview>>? = null
+    //private var listDataChild: HashMap<String, MutableList<Interview>>? = null
 
     private val lastExpandedPosition = -1
 
-    constructor(context: Context, listDataHeader: MutableList<String>, listDataChild: HashMap<String, MutableList<Interview>>)
-    {
-        this.context = context
-        this.listDataHeader = listDataHeader
-        this.listDataChild = listDataChild
-    }
+//    constructor(context: Context, listDataHeader: MutableList<String>, listDataChild: HashMap<String, MutableList<Interview>>)
+//    {
+//        this.context = context
+//        this.listDataHeader = listDataHeader
+//        this.listDataChild = listDataChild
+//    }
 
     constructor(context: Context)
     {
@@ -61,26 +60,26 @@ class InterviewsExpListAdapter : BaseExpandableListAdapter
     }
 
 
-    fun addListDataChild(header: String, dataChild: MutableList<Interview>)
-    {
-        if (listDataChild == null)
-        {
-            listDataChild = HashMap()
-        }
-
-        listDataChild!![header] = dataChild
-    }
+//    fun addListDataChild(header: String, dataChild: MutableList<Interview>)
+//    {
+//        if (listDataChild == null)
+//        {
+//            listDataChild = HashMap()
+//        }
+//
+//        listDataChild!![header] = dataChild
+//    }
 
     fun deleteChild(groupPosition: Int, childPosition: Int)
     {
         val ldh = listDataHeader!![groupPosition]
-        val ldc = listDataChild!![ldh]
-        ldc!!.removeAt(childPosition)
+        //val ldc = listDataChild!![ldh]
+        //ldc!!.removeAt(childPosition)
     }
 
     fun deleteAll()
     {
-        listDataChild = null
+        //listDataChild = null
         listDataHeader = null
     }
 
@@ -98,8 +97,8 @@ class InterviewsExpListAdapter : BaseExpandableListAdapter
     override fun getChild(groupPosition: Int, childPosition: Int): Any
     {
         val ldh = listDataHeader!![groupPosition]
-        val ldc = listDataChild!![ldh]
-        return ldc!!.get(childPosition)
+        //val ldc = listDataChild!![ldh]
+        return Any()//ldc!!.get(childPosition)
     }
 
     override fun getChildId(groupPosition: Int, childPosition: Int): Long
@@ -110,7 +109,7 @@ class InterviewsExpListAdapter : BaseExpandableListAdapter
     override fun getChildView(groupPosition: Int, childPosition: Int, isLastChild: Boolean, convertView: View?, parent: ViewGroup): View
     {
         var convertView = convertView
-        val interview = getChild(groupPosition, childPosition) as Interview
+        //val interview = getChild(groupPosition, childPosition) as Interview
 
         if (convertView == null)
         {
@@ -122,14 +121,14 @@ class InterviewsExpListAdapter : BaseExpandableListAdapter
         val timeEnd = convertView.findViewById<View>(R.id.tvEndTime) as TextView
         val delInterview = convertView.findViewById<View>(R.id.btnDeleteInterview) as ImageButton
 
-        if (interview != null)
-        {
+        //if (interview != null)
+        //{
             delInterview.setOnClickListener {
                 //                    try
                 //                    {
                 //DatabaseHelper helper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
                 val helper = GreenDaoHelper(context!!)
-                helper.initSession().interviewDao.delete(interview)
+                //helper.initSession().interviewDao.delete(interview)
                 deleteChild(groupPosition, childPosition)
                 notifyDataSetChanged()
 
@@ -147,13 +146,13 @@ class InterviewsExpListAdapter : BaseExpandableListAdapter
                 //                    }
             }
 
-            if (interviewType != null && timeStart != null && timeEnd != null)
-            {
-                timeStart.text = interview.startTimeString
-                timeEnd.text = interview.endTimeString
-                interviewType.text = interview.interviewType
-            }
-        }
+//            if (interviewType != null && timeStart != null && timeEnd != null)
+////            {
+////                timeStart.text = interview.startTimeString
+////                timeEnd.text = interview.endTimeString
+////                interviewType.text = interview.interviewType
+////            }
+        //}
 
         return convertView
     }
@@ -162,9 +161,9 @@ class InterviewsExpListAdapter : BaseExpandableListAdapter
     override fun getChildrenCount(groupPosition: Int): Int
     {
         val ldh = listDataHeader!![groupPosition]
-        val ldc = listDataChild!![ldh]
+        //val ldc = listDataChild!![ldh]
 
-        return ldc!!.size
+        return Int.MAX_VALUE//ldc!!.size
     }
 
     override fun getGroup(groupPosition: Int): Any
