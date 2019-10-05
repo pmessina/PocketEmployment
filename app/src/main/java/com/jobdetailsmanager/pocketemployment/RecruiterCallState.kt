@@ -15,9 +15,7 @@
 
 package com.jobdetailsmanager.pocketemployment
 
-enum class RecruiterCallState private constructor(//When set, assign actions for user to take to prepare for an interview
-
-        val value: Int, val label: String)
+enum class RecruiterCallState private constructor(val value: Int, val label: String)
 {
     INITIAL_CALL(0, "Initial Call"), //Set when user receives a call from recruiter
     RECIEVE_JOB_DESCRIPTION(1, "Receive Job Description"), //Set when user receives job description from specified email
