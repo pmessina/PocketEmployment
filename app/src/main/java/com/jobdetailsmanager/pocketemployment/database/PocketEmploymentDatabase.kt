@@ -14,7 +14,7 @@ import kotlinx.coroutines.coroutineScope
 import java.lang.Exception
 import java.util.concurrent.Executors
 
-@Database(entities = [Contact::class], version = 1, exportSchema = false)
+@Database(entities = [Contact::class, Employer::class, Interview::class, JobPosition::class, Recruiter::class, RecruiterCompany::class], version = 1, exportSchema = false)
 abstract class PocketEmploymentDatabase : RoomDatabase() {
 
 
