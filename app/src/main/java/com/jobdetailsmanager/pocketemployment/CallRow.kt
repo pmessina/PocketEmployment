@@ -15,14 +15,14 @@
 
 package com.jobdetailsmanager.pocketemployment
 
-import org.joda.time.DateTime
+import java.time.LocalDate
 
 class CallRow
 {
     var callName: String? = null
     var phoneNumber: String? = null
     var callType: String? = null
-    var callDate: DateTime? = null
+    var callDate: LocalDate? = null
     var callDuration: String? = null
     var callGeoLocation: String? = null
 }

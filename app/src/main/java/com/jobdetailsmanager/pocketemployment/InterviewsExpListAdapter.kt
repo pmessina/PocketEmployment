@@ -127,7 +127,6 @@ class InterviewsExpListAdapter : BaseExpandableListAdapter
                 //                    try
                 //                    {
                 //DatabaseHelper helper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
-                val helper = GreenDaoHelper(context!!)
                 //helper.initSession().interviewDao.delete(interview)
                 deleteChild(groupPosition, childPosition)
                 notifyDataSetChanged()

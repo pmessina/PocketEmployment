@@ -22,14 +22,21 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
+import android.os.Build
 import android.provider.CalendarContract
+import androidx.annotation.RequiresApi
 import androidx.loader.content.CursorLoader
-import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
 import permissions.dispatcher.NeedsPermission
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.temporal.TemporalAdjusters
+import java.time.temporal.TemporalAmount
+import java.util.*
 
 
 //TODO: Make sure runtime permissions are handled by the caller
+@RequiresApi(Build.VERSION_CODES.O)
 class AndroidCalendarProvider(internal var context: Context)
 {
 
@@ -39,14 +46,17 @@ class AndroidCalendarProvider(internal var context: Context)
 
     internal var cursor: Cursor? = null
 
+    val currentDay = LocalDateTime.now()
+
     val eventsCurrentWeekCursorLoader: CursorLoader
+
         get()
         {
-            val currentDay = DateTime.now()
 
-            val dayOfWeek = currentDay.dayOfWeek().get()
-            val startOfWeek = currentDay.minusDays(dayOfWeek - 1)
-            val endOfWeek = currentDay.plusDays(7 - dayOfWeek)
+            val dayOfWeek = currentDay.dayOfWeek
+
+            val startOfWeek = currentDay.minusDays(1)
+            val endOfWeek = currentDay.plusDays(7L - dayOfWeek.value)
 
             return getCalendarEventsCursorLoader(startOfWeek, endOfWeek)
         }
@@ -55,8 +65,7 @@ class AndroidCalendarProvider(internal var context: Context)
     val eventsCurrentMonthCursorLoader: CursorLoader
         get()
         {
-            val currentDay = DateTime.now().dayOfMonth().withMinimumValue()
-            val endOfMonth = DateTime.now().dayOfMonth().withMaximumValue()
+            val endOfMonth = currentDay.with(TemporalAdjusters.lastDayOfMonth())
 
             return getCalendarEventsCursorLoader(currentDay, endOfMonth)
         }
@@ -64,7 +73,7 @@ class AndroidCalendarProvider(internal var context: Context)
     val eventsTodayCursorLoader: CursorLoader
         get()
         {
-            val startOfDay = DateTime.now().withTimeAtStartOfDay()
+            val startOfDay = currentDay.toLocalDate().atStartOfDay()
 
             return getCalendarEventsCursorLoader(startOfDay, startOfDay.plusDays(1))
         }
@@ -122,7 +131,7 @@ class AndroidCalendarProvider(internal var context: Context)
 
 
     //Get all interview calendar events in a week that have the title with "Interview" in them
-    fun getCalendarEventsCursor(startTime: DateTime, endTime: DateTime): Cursor?
+    fun getCalendarEventsCursor(startTime: LocalDateTime, endTime: LocalDateTime): Cursor?
     {
         val cr = context.contentResolver
 
@@ -132,7 +141,7 @@ class AndroidCalendarProvider(internal var context: Context)
         query.append(eventStartCol).append(" BETWEEN ")
         query.append(startTime.millis).append(" AND ")
         query.append(endTime.millis).append(" AND ")
-        query.append(eventAllDay + " = 0").append(" AND ")
+        query.append("$eventAllDay = 0").append(" AND ")
         query.append(eventTitle).append(" LIKE ?")
 
         val arguments = arrayOf("%interview%")
@@ -145,7 +154,7 @@ class AndroidCalendarProvider(internal var context: Context)
 
     @SuppressLint("MissingPermission")
     //Make sure permission is handled by the caller
-    fun insertCalendarEvent(interviewTitle: String, startTime: DateTime, endTime: DateTime)
+    fun insertCalendarEvent(interviewTitle: String, startTime: LocalDateTime, endTime: LocalDateTime)
     {
         val cr = context.contentResolver
         val cv = ContentValues()
@@ -153,7 +162,7 @@ class AndroidCalendarProvider(internal var context: Context)
         cv.put(eventTitle, interviewTitle)
         cv.put(eventStartCol, startTime.millis)
         cv.put(eventEndCol, endTime.millis)
-        cv.put(eventTimeZone, DateTimeZone.getDefault().toString())
+        cv.put(eventTimeZone,  TimeZone.getDefault().getDisplayName(Locale.US))
 
 //                if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CALENDAR) == PackageManager.PERMISSION_GRANTED)
 //                {
@@ -178,13 +187,13 @@ class AndroidCalendarProvider(internal var context: Context)
 //
 //    }
 
-    fun getCalendarEventsCursorLoader(startTime: DateTime, endTime: DateTime): CursorLoader
+    fun getCalendarEventsCursorLoader(startTime: LocalDateTime, endTime: LocalDateTime): CursorLoader
     {
         val projection = arrayOf(Id, calId, eventTitle, eventStartCol, eventEndCol, eventDescription)
 
         val query = StringBuilder()
         query.append(eventStartCol).append(" >= ")
-        query.append(startTime.millis).append(" AND ")
+        query.append(startTime.toInstant(ZoneOffset.UTC).toEpochMilli()).append(" AND ")
         query.append(eventStartCol).append(" <= ")
         query.append(endTime.millis)
         //.append(" AND ");
@@ -259,12 +268,21 @@ class AndroidCalendarProvider(internal var context: Context)
 //    }
 
 
-    fun setCalendarEvent(beginTime: DateTime, endTime: DateTime, title: String, description: String, eventLocation: String)
+    fun setCalendarEvent(beginTime: LocalDateTime, endTime: LocalDateTime, title: String, description: String, eventLocation: String)
     {
         val parseBeginTime = beginTime.millis
         val parseEndTime = endTime.millis
 
-        val intent = Intent(Intent.ACTION_INSERT).addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).setData(CalendarContract.Events.CONTENT_URI).putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, parseBeginTime).putExtra(CalendarContract.EXTRA_EVENT_END_TIME, parseEndTime).putExtra(CalendarContract.Events.TITLE, title).putExtra(CalendarContract.Events.DESCRIPTION, description).putExtra(CalendarContract.Events.EVENT_LOCATION, eventLocation).putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY).putExtra(CalendarContract.Reminders.HAS_ALARM, 0)
+        val intent = Intent(Intent.ACTION_INSERT)
+                .addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, parseBeginTime)
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, parseEndTime)
+                .putExtra(CalendarContract.Events.TITLE, title)
+                .putExtra(CalendarContract.Events.DESCRIPTION, description)
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, eventLocation)
+                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY).putExtra(CalendarContract.Reminders.HAS_ALARM, 0)
         //.putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com");
         context.startActivity(intent)
 
@@ -277,9 +295,9 @@ class AndroidCalendarProvider(internal var context: Context)
         val cr = context.contentResolver
         val cv = ContentValues()
         cv.put(calDisplayName, userEmailAddress)
-        cv.put(eventStartCol, DateTime.now().toDate().toString())
-        cv.put(eventEndCol, DateTime.now().plusHours(1).toDate().toString())
-        cv.put(eventTimeZone, DateTimeZone.getDefault().toString())
+        cv.put(eventStartCol, LocalDate.now().toString())
+        cv.put(eventEndCol, LocalDateTime.now().plusHours(1).toString())
+        cv.put(eventTimeZone, TimeZone.getDefault().toString())
 
         cr.insert(CalendarContract.Events.CONTENT_URI, cv)
     }
@@ -318,4 +336,11 @@ class AndroidCalendarProvider(internal var context: Context)
         val RC_READ_CALENDER = 120
     }
 
+}
+
+val LocalDateTime.millis : Long
+get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    this.toInstant(ZoneOffset.UTC).toEpochMilli()
+} else {
+    TODO("VERSION.SDK_INT < O")
 }

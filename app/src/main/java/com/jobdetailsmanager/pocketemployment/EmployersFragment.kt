@@ -71,8 +71,6 @@ class EmployersFragment : ListFragment()
         //        try
         //        {
 
-        val helper = GreenDaoHelper(activity!!)
-
         val employerListView = this.listView
 
         //val employerList = helper.initSession().employerDao.queryBuilder().build().list()

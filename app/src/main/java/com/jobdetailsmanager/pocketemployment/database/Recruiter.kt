@@ -17,21 +17,24 @@ package com.jobdetailsmanager.pocketemployment.database
 
 
 import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "recruiters")
 class Recruiter {
 
-    @Id(autoincrement = true)
+    @PrimaryKey(autoGenerate = true)
     var recruiterId: Long = 0
 
     var phoneNumber: String? = null
 
     var emailAddress: String? = null
 
-    private val recruiterCompany: RecruiterCompany? = null
+    //private val recruiterCompany: RecruiterCompany? = null
 
     constructor() {}
 
+    @Ignore
     constructor(recruiterId: Long, phoneNumber: String, emailAddress: String) {
         this.recruiterId = recruiterId
         this.phoneNumber = phoneNumber

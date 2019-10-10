@@ -20,7 +20,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.ExpandableListAdapter
-import org.joda.time.DateTime
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnShowRationale
 import permissions.dispatcher.PermissionRequest
@@ -66,13 +65,13 @@ class RecruiterCallsLogActivity : AppCompatActivity()
 //            recruiterContactKeys.add(o.toString())
 //        }
 
-        Collections.sort(recruiterContactKeys, Comparator { lhs, rhs ->
-            val dt1 = DateTime(lhs)
-            val dt2 = DateTime(rhs)
-
-            if (dt1.isBefore(dt2)) return@Comparator -1
-            if (dt1.isAfter(dt2)) 1 else 0
-        })
+//        Collections.sort(recruiterContactKeys, Comparator { lhs, rhs ->
+//            val dt1 = DateTime(lhs)
+//            val dt2 = DateTime(rhs)
+//
+//            if (dt1.isBefore(dt2)) return@Comparator -1
+//            if (dt1.isAfter(dt2)) 1 else 0
+//        })
 
 
         //expListAdapter = RecruiterCallsExpListAdapter(this, recruiterContactKeys, recruiterContactDates)

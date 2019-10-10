@@ -109,8 +109,6 @@ class RecruitersFragment : Fragment() //implements ServiceConnection
 
         //getActivity().bindService(intent, this, Context.BIND_AUTO_CREATE);
 
-        val greenDaoHelper = GreenDaoHelper(activity!!)
-
         //        RecruiterDao recruiterDao = greenDaoHelper.initSession().getRecruiterDao();
         //val contactDao = greenDaoHelper.initSession().contactDao
 
@@ -238,7 +236,6 @@ class RecruitersFragment : Fragment() //implements ServiceConnection
 
         try {
             //DatabaseHelper helper = OpenHelperManager.getHelper(getActivity(), DatabaseHelper.class);
-            val greenDaoHelper = GreenDaoHelper(activity!!)
 
             //val contactDao = greenDaoHelper.initSession().contactDao
 
@@ -349,7 +346,6 @@ class RecruitersFragment : Fragment() //implements ServiceConnection
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        val greenDaoHelper = GreenDaoHelper(activity!!)
 
         when (item.itemId) {
             R.id.delete_contacts -> {

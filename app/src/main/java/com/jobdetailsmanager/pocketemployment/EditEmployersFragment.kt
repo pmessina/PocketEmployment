@@ -36,7 +36,6 @@ class EditEmployersFragment : Fragment()
 
         //Dao<Employer, Integer> employerDao = helper.getEmployerDao();
 
-        val greenDaoHelper = GreenDaoHelper(activity!!)
         //val employerDao = greenDaoHelper.initSession().employerDao
 
 //        val employer = Employer()

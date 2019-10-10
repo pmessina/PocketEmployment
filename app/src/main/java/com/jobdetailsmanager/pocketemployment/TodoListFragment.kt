@@ -21,13 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListView
-import com.github.salomonbrys.kodein.KodeinInjected
-import com.github.salomonbrys.kodein.KodeinInjector
-import com.github.salomonbrys.kodein.LazyKodein
-import com.github.salomonbrys.kodein.android.appKodein
-import com.github.salomonbrys.kodein.instance
 
-import org.greenrobot.greendao.query.QueryBuilder
 
 import java.util.ArrayList
 import java.util.Arrays
@@ -35,14 +29,14 @@ import java.util.Arrays
 
 class TodoListFragment : Fragment()
 {
-    private val kodein = LazyKodein(appKodein)
+    //private val kodein = LazyKodein(appKodein)
 
-    val helper:GreenDaoHelper by kodein.instance()
+    //val helper:GreenDaoHelper by kodein.instance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_todo_list, container, false)
+        return inflater.inflate(R.layout.fragment_todo_list, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?)

@@ -35,8 +35,6 @@ class JobPositionsDialogFragment : DialogFragment()
 
     lateinit var jobMarketDetailsMenuFragment: AddJobPositionsListener
 
-    lateinit var greenDaoHelper: GreenDaoHelper
-
     override fun onAttach(context: Context)
     {
         super.onAttach(context)
@@ -50,8 +48,6 @@ class JobPositionsDialogFragment : DialogFragment()
         val view = inflater.inflate(R.layout.fragment_dialog_add_job_positions, container, false)
 
         //TODO: Query database; insert existing job positions
-
-        greenDaoHelper = GreenDaoHelper(activity!!)
 
         //val jobTitles = greenDaoHelper.initSession().jobPositionDao.queryBuilder().list() //Arrays.asList("Developer", "Engineer", "Programmer");
 

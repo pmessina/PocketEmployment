@@ -16,6 +16,7 @@
 package com.jobdetailsmanager.pocketemployment
 
 import android.database.Cursor
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.loader.app.LoaderManager
@@ -26,7 +27,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 
+@RequiresApi(Build.VERSION_CODES.O)
 class CallsThisWeekFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
 {
     private var listAdapter: CallsCursorAdapter? = null
@@ -39,11 +42,12 @@ class CallsThisWeekFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
-        val view = inflater!!.inflate(R.layout.fragment_lv_calls, container, false)
+        val view = inflater.inflate(R.layout.fragment_lv_calls, container, false)
         //ButterKnife.bind(this, view)
 
         return view
     }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?)
     {
@@ -57,9 +61,9 @@ class CallsThisWeekFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor>
     {
-        lcp = CallsLogContentProvider(activity)
+        lcp = CallsLogContentProvider(context!!)
 
-        cursorLoader = lcp!!.getCallsThisWeek()
+        cursorLoader = lcp!!.callsThisWeek
 
         return cursorLoader!!
     }

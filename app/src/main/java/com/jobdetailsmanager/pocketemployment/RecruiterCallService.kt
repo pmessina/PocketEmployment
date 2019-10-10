@@ -31,12 +31,6 @@ import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
 import android.util.Log
 import android.widget.Toast
-import com.github.salomonbrys.kodein.*
-import com.github.salomonbrys.kodein.android.KodeinService
-import com.github.salomonbrys.kodein.android.ServiceInjector
-import com.github.salomonbrys.kodein.android.appKodein
-
-import org.joda.time.DateTime
 
 import java.util.Locale
 
@@ -48,13 +42,13 @@ import java.util.Locale
 
 class RecruiterCallService : Service()
 {
-    private val kodein = LazyKodein(appKodein)
+    //private val kodein = LazyKodein(appKodein)
 
     internal var binder: IBinder = RecruiterCallBinder()
 
     internal var incomingNumberExists: Boolean = false
 
-    val callsNotificationManager:CallsNotificationManager by kodein.instance()
+    //val callsNotificationManager:CallsNotificationManager by kodein.instance()
 
     private var telephonyManager: TelephonyManager? = null
 
@@ -94,7 +88,7 @@ class RecruiterCallService : Service()
         //callsNotificationManager = kodein().instance()
 
         //callsNotificationManager = CallsNotificationManager.Companion.getInstance(this);
-        callsNotificationManager.setUpNotification(SERVICE_STARTED, "Service Started", PendingIntent.getActivity(this, 0, intent, 0), true)
+        //callsNotificationManager.setUpNotification(SERVICE_STARTED, "Service Started", PendingIntent.getActivity(this, 0, intent, 0), true)
 
         //TODO: Refactor to query calls log
 
@@ -118,7 +112,7 @@ class RecruiterCallService : Service()
                 {
 
                     val pendingIntent = PendingIntent.getActivity(this@RecruiterCallService, 0, intent, 0)
-                    callsNotificationManager.setUpNotification(CALL_RECEIVED, "Call Received from " + incomingNumber!!, pendingIntent, false)
+                    //callsNotificationManager.setUpNotification(CALL_RECEIVED, "Call Received from " + incomingNumber!!, pendingIntent, false)
                     processIncomingNumber(baseContext, incomingNumber, PreferenceManager.getDefaultSharedPreferences(this@RecruiterCallService))
                 }
                 if (state == TelephonyManager.CALL_STATE_RINGING)
@@ -131,7 +125,7 @@ class RecruiterCallService : Service()
 
                     val pendingIntent = PendingIntent.getActivity(this@RecruiterCallService, 0, intent, 0)
                     //callsNotificationManager = CallsNotificationManager.Companion.getInstance(RecruiterCallService.this);
-                    callsNotificationManager.setUpCustomNotification(CALL_INCOMING, "You have a phone call from: " + incomingNumber!!, pendingIntent)
+                    //callsNotificationManager.setUpCustomNotification(CALL_INCOMING, "You have a phone call from: " + incomingNumber!!, pendingIntent)
 
 
                     ring = true
@@ -162,7 +156,7 @@ class RecruiterCallService : Service()
 
                     val formattedPhoneNumber = PhoneNumberUtils.formatNumber(incomingNumber, Locale.getDefault().country)
 
-                    callsNotificationManager.setDialogNotification(0, "Add $formattedPhoneNumber to contacts?", yesPendingIntent!!, noPendingIntent!!)
+                    //callsNotificationManager.setDialogNotification(0, "Add $formattedPhoneNumber to contacts?", yesPendingIntent!!, noPendingIntent!!)
 
 
                     callReceived = true
@@ -214,8 +208,6 @@ class RecruiterCallService : Service()
         {
             try
             {
-                val greenDaoHelper = GreenDaoHelper(context)
-
 
                 //val contactDao = greenDaoHelper.initSession().contactDao
 

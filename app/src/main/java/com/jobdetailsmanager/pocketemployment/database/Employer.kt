@@ -16,6 +16,7 @@
 package com.jobdetailsmanager.pocketemployment.database
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "employers")
@@ -30,10 +31,11 @@ class Employer {
 
     var employerDescription: String? = null
 
-    private val contact: Contact? = null
+    //private val contact: Contact? = null
 
-    constructor() {}
+    constructor()
 
+    @Ignore
     constructor(employerId: Long, employerName: String, employerAddress: String,
                 employerDescription: String) {
         this.employerId = employerId

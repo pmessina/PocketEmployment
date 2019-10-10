@@ -19,29 +19,34 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.provider.CalendarContract
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 
 import com.twotoasters.sectioncursoradapter.adapter.SectionCursorAdapter
 import com.twotoasters.sectioncursoradapter.adapter.viewholder.ViewHolder
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
-import org.joda.time.DateTime
-import org.joda.time.format.DateTimeFormat
-import org.joda.time.format.DateTimeFormatter
-
-@TargetApi(value = 21)
+@RequiresApi(Build.VERSION_CODES.O)
 class InterviewsCursorAdapter(internal var context: Context, cursor: Cursor) : SectionCursorAdapter<String, InterviewsCursorAdapter.InterviewDateViewHolder, InterviewsCursorAdapter.InterviewViewHolder>(context, cursor, 0, R.layout.interviews_date_tv_separator, R.layout.interviews_lv_row_layout)
 {
 
+
     override fun getSectionFromCursor(cursor: Cursor): String
     {
-        val dateFormatter = DateTimeFormat.longDate()
+        val dateFormatter = DateTimeFormatter.ISO_DATE_TIME
         val eventStart = cursor.getString(cursor.getColumnIndex(eventStartCol))
 
-        return dateFormatter.print(java.lang.Long.parseLong(eventStart))
+        val time = Instant.ofEpochMilli(eventStart.toLong()).atZone(ZoneId.systemDefault()).toLocalDateTime().format(dateFormatter)
+
+
+        return time.toString()
     }
 
     override fun createSectionViewHolder(sectionView: View, section: String): InterviewDateViewHolder
@@ -70,16 +75,16 @@ class InterviewsCursorAdapter(internal var context: Context, cursor: Cursor) : S
             val eventEnd = cursor.getString(cursor.getColumnIndex(eventEndCol))
             val eventTitleName = cursor.getString(cursor.getColumnIndex(eventTitle))
 
-            val timeFormatter = DateTimeFormat.shortTime()
-            val startTimeDT = DateTime(java.lang.Long.parseLong(eventStart))
-            val endTimeDT = DateTime(java.lang.Long.parseLong(eventEnd))
-            val eventStartTF = timeFormatter.print(startTimeDT)
-            val eventEndTF = timeFormatter.print(endTimeDT)
+            val timeFormatter = DateTimeFormatter.ISO_LOCAL_TIME
+            val startTimeDT = eventStart.toLong()
+            val endTimeDT = eventEnd.toLong()
+            val eventStartTF = Instant.ofEpochMilli(startTimeDT).atZone(ZoneId.systemDefault()).toLocalDate()
+            val eventEndTF = Instant.ofEpochMilli(endTimeDT).atZone(ZoneId.systemDefault()).toLocalDate()
 
-            itemViewHolder.timeStart.text = eventStartTF
+            itemViewHolder.timeStart.text = eventStartTF.toString()
             itemViewHolder.timeStart.setOnClickListener(null)
 
-            itemViewHolder.timeEnd.text = eventEndTF
+            itemViewHolder.timeEnd.text = eventEndTF.toString()
             itemViewHolder.timeEnd.setOnClickListener(null)
 
             itemViewHolder.interviewType.text = eventTitleName
@@ -95,10 +100,10 @@ class InterviewsCursorAdapter(internal var context: Context, cursor: Cursor) : S
         if (convertView != null)
         {
             this.count
-            Toast.makeText(context, position.toString() + ", " + convertView.toString() + "", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "$position, $convertView", Toast.LENGTH_SHORT).show()
         } else
         {
-            Toast.makeText(context, position.toString() + " convertView is null", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "$position convertView is null", Toast.LENGTH_SHORT).show()
         }
 
         return super.getView(position, convertView, parent)

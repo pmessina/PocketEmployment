@@ -16,6 +16,7 @@
 package com.jobdetailsmanager.pocketemployment.database
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.jobdetailsmanager.pocketemployment.database.Recruiter
 
@@ -30,10 +31,11 @@ class RecruiterCompany {
 
     var website: String? = null
 
-    private var recruiters: List<Recruiter>? = null
+    //private var recruiters: List<Recruiter>? = null
 
     constructor() {}
 
+    @Ignore
     constructor(recruiterCompanyId: Int, address: String,
                 website: String) {
         this.recruiterCompanyId = recruiterCompanyId

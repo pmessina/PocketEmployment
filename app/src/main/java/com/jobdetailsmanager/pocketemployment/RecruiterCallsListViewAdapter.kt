@@ -25,10 +25,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 
-import org.joda.time.DateTime
-import org.joda.time.LocalTime
-
-
 
 /**
  * Created by Admin on 6/6/2015.

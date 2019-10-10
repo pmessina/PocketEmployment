@@ -22,6 +22,7 @@ import androidx.annotation.RequiresApi
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.jobdetailsmanager.pocketemployment.RecruiterCallState
 
@@ -30,12 +31,14 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Comparator
 
-@Entity(foreignKeys = [ForeignKey(entity = Employer::class, parentColumns = ["id"], childColumns = ["id"], onDelete = CASCADE)])
+@Entity(foreignKeys = [ForeignKey(entity = Employer::class, parentColumns = ["employerId"], childColumns = ["contactId"], onDelete = CASCADE)])
 @RequiresApi(Build.VERSION_CODES.O)
 class Contact : Serializable, Comparator<Contact> {
 
     @PrimaryKey(autoGenerate = true)
     var contactId: Long = 0
+
+    var employerId: Long = 0
 
     var recruiterFirstName: String? = null
 
@@ -72,6 +75,7 @@ class Contact : Serializable, Comparator<Contact> {
     constructor() {}
 
 
+    @Ignore
     constructor(contactId: Long, recruiterFirstName: String, recruiterLastName: String, recruiterCompanyName: String,
                 recruiterCompanyAddress: String, recruiterPhoneNumber: String, dateCallReceived: String, recruiterCallState: Int) {
         this.contactId = contactId

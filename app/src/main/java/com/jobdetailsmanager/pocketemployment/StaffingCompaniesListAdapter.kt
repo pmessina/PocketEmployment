@@ -44,7 +44,6 @@ class StaffingCompaniesListAdapter : ArrayAdapter<String>
 
     fun remove(location: Int)
     {
-        val greenDaoHelper = GreenDaoHelper(context!!)
         //val recruiterCompanyDao = greenDaoHelper.initSession().recruiterCompanyDao
 
 

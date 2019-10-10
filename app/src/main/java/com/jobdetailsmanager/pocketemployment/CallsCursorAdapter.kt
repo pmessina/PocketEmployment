@@ -15,32 +15,40 @@
 
 package com.jobdetailsmanager.pocketemployment
 
-import android.annotation.TargetApi
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.Typeface
+import android.os.Build
 import android.telephony.PhoneNumberUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.jobdetailsmanager.pocketemployment.CallsLogContentProvider.*
+import androidx.annotation.RequiresApi
+import com.jobdetailsmanager.pocketemployment.CallsLogContentProvider.Companion.CALLS_LOG_CACHED_NAME
+import com.jobdetailsmanager.pocketemployment.CallsLogContentProvider.Companion.CALLS_LOG_DATE
+import com.jobdetailsmanager.pocketemployment.CallsLogContentProvider.Companion.CALLS_LOG_DURATION
+import com.jobdetailsmanager.pocketemployment.CallsLogContentProvider.Companion.CALLS_LOG_GEOCODED_LOCATION
+import com.jobdetailsmanager.pocketemployment.CallsLogContentProvider.Companion.CALLS_LOG_NUMBER
+import com.jobdetailsmanager.pocketemployment.CallsLogContentProvider.Companion.CALLS_LOG_TYPE
 import com.twotoasters.sectioncursoradapter.adapter.SectionCursorAdapter
 import com.twotoasters.sectioncursoradapter.adapter.viewholder.ViewHolder
-import org.joda.time.DateTime
-import org.joda.time.format.DateTimeFormat
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 
-@TargetApi(value = 21)
+@RequiresApi(Build.VERSION_CODES.O)
 class CallsCursorAdapter(internal var context: Context, cursor: Cursor?) : SectionCursorAdapter<CallRow, CallsCursorAdapter.CallsDateViewHolder, CallsCursorAdapter.CallsDetailsViewHolder>(context, cursor, 0, R.layout.recruiter_contact_info_group, R.layout.recruiter_contact_info)
 {
+
     override fun getSectionFromCursor(callsLogCursor: Cursor): CallRow
     {
         val date = callsLogCursor.getString(callsLogCursor.getColumnIndex(CALLS_LOG_DATE))
 
         val callRow = CallRow()
 
-        callRow.callDate = DateTime(java.lang.Long.parseLong(date))
+        callRow.callDate = Instant.ofEpochMilli(java.lang.Long.parseLong(date)).atZone(ZoneId.systemDefault()).toLocalDate()
 
         return callRow
     }
@@ -54,8 +62,8 @@ class CallsCursorAdapter(internal var context: Context, cursor: Cursor?) : Secti
     {
         sectionViewHolder.lblListHeader.setTypeface(null, Typeface.BOLD_ITALIC)
 
-        val formatter = DateTimeFormat.fullDate()
-        val formattedHeaderTitle = formatter.print(DateTime(section.callDate))
+        val formatter = DateTimeFormatter.ISO_DATE_TIME
+        val formattedHeaderTitle = section.callDate?.format(formatter)
 
         sectionViewHolder.lblListHeader.setText(formattedHeaderTitle)
 
@@ -99,12 +107,11 @@ class CallsCursorAdapter(internal var context: Context, cursor: Cursor?) : Secti
             itemViewHolder.callName.text = callsLogCursor.getString(name)
         }
 
-        val time = DateTime(java.lang.Long.parseLong(callsLogCursor.getString(date)))
+        val time = Instant.ofEpochMilli(callsLogCursor.getString(date).toLong()).atZone(ZoneId.systemDefault()).toLocalDateTime()
 
-        val formatter = DateTimeFormat.shortTime()
-        val formattedTime = formatter.print(time)
+        val formatter = DateTimeFormatter.ISO_LOCAL_TIME
 
-        itemViewHolder.callDate.text = formattedTime
+        itemViewHolder.callDate.text = time.format(formatter)
         //itemViewHolder.setCallDuration(callsLogCursor.getString(duration));
         //itemViewHolder.setCallGeoLocation(callsLogCursor.getString(geoLocation));
     }

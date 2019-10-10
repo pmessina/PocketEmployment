@@ -21,11 +21,12 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 import androidx.room.ForeignKey.CASCADE
+import androidx.room.Ignore
 import com.jobdetailsmanager.pocketemployment.database.Employer
 import com.jobdetailsmanager.pocketemployment.database.Interview
 
-@Entity(tableName = "job_positions", foreignKeys = [ForeignKey(entity = Employer::class, parentColumns = ["id"], childColumns = ["id"], onDelete = CASCADE),
-                                                    ForeignKey(entity = Interview::class, parentColumns = ["id"], childColumns = ["id"], onDelete = CASCADE)])
+@Entity(tableName = "job_positions", foreignKeys = [ForeignKey(entity = Employer::class, parentColumns = ["employerId"], childColumns = ["jobPositionId"], onDelete = CASCADE),
+                                                    ForeignKey(entity = Interview::class, parentColumns = ["interviewId"], childColumns = ["jobPositionId"], onDelete = CASCADE)])
 class JobPosition {
 
     //    public Employer getEmployer()
@@ -40,6 +41,9 @@ class JobPosition {
 
     @PrimaryKey(autoGenerate = true)
     var jobPositionId: Long = 0
+
+    var employerId: Long = 0
+    var interviewId: Long = 0
 
     /** Used to resolve relations  */
     //    @Generated(hash = 2040040024)
@@ -61,6 +65,7 @@ class JobPosition {
 
     constructor() {}
 
+    @Ignore
     constructor(jobPositionId: Long, jobPositionTitle: String,
                 jobPositionDescription: String, jobPositionLevel: Int, applyDate: String,
                 interviewDate: String) {

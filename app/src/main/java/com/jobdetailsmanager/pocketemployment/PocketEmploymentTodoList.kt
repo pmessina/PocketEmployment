@@ -32,7 +32,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
-import com.github.salomonbrys.kodein.android.androidSupportFragmentScope
 import kotlinx.android.synthetic.main.activity_pocket_employment_drawer_layout.*
 import kotlinx.android.synthetic.main.app_bar_navigation_drawer.*
 

@@ -329,8 +329,6 @@ class JobContactDetailsFragment : Fragment()//extends DialogFragment implements 
     //@OnClick(R.id.btnAddToContacts)
     fun onAddContactClick(v: View)
     {
-        val greenDaoHelper = GreenDaoHelper(activity!!)
-
         //TODO: Check if contact/recruiter exists before click or during click
 
         if (spContactType!!.selectedItem === ContactType.RECRUITER)
@@ -723,7 +721,6 @@ class JobContactDetailsFragment : Fragment()//extends DialogFragment implements 
             val em = edtEmailAddress!!.text.toString()
 
             val cs = spRecruiterCallState!!.selectedItem as RecruiterCallState
-            val greenDaoHelper = GreenDaoHelper(activity!!)
 
             //            if (contactType == ContactType.RECRUITER)
             //            {

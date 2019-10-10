@@ -25,11 +25,6 @@ import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.TextView
 
-import org.joda.time.DateTime
-import org.joda.time.format.DateTimeFormat
-import org.joda.time.format.DateTimeFormatter
-
-
 //class RecruiterCallsExpListAdapter<T : Contact>(private val context: Context, private var listDataHeader: MutableList<String>, private var listDataChild: ArrayMap<String, MutableList<T>>) : BaseExpandableListAdapter()
 //{
 //

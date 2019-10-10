@@ -27,20 +27,23 @@ import java.io.Serializable
 import java.util.Comparator
 
 import androidx.room.ForeignKey.CASCADE
+import androidx.room.Ignore
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-@Entity(tableName = "interviews", foreignKeys = [ForeignKey(entity = JobPosition::class, parentColumns = ["id"], childColumns = ["id"], onDelete = CASCADE)])
+@Entity(tableName = "interviews", foreignKeys = [ForeignKey(entity = JobPosition::class, parentColumns = ["jobPositionId"], childColumns = ["interviewId"], onDelete = CASCADE)])
 @RequiresApi(Build.VERSION_CODES.O)
 class Interview : Serializable, Comparator<Interview> {
 
     @PrimaryKey(autoGenerate = true)
     var interviewId: Long = 0
 
-    private var startTime: String? = null
+    var jobPositionId: Long = 0
 
-    private var endTime: String? = null
+    var startTime: String? = null
+
+    var endTime: String? = null
 
     var interviewType: String? = null
 
@@ -48,12 +51,10 @@ class Interview : Serializable, Comparator<Interview> {
 
     var feedback: String? = null
 
-    @ToMany(referencedJoinProperty = "jobPositionId")
-    private var jobPositions: List<JobPosition>? = null
+    //private var jobPositions: List<JobPosition>? = null
 
-    val startTimeDT: DateTime
-
-        get() = DateTime(java.lang.Long.parseLong(startTime!!))
+//    val startTimeDT: LocalDateTime
+//        get()
 
     val startTimeString: String
 
@@ -71,7 +72,6 @@ class Interview : Serializable, Comparator<Interview> {
         }
 
     val endTimeDT: LocalDateTime
-        @Keep
         get() = LocalDateTime.parse(endTime)
 
     val endTimeString: String
@@ -85,6 +85,7 @@ class Interview : Serializable, Comparator<Interview> {
 
     constructor() {}
 
+    @Ignore
     constructor(interviewId: Long, startTime: String, endTime: String,
                 interviewType: String, description: String, feedback: String) {
         this.interviewId = interviewId
@@ -100,8 +101,8 @@ class Interview : Serializable, Comparator<Interview> {
     }
 
     override fun compare(lhs: Interview, rhs: Interview): Int {
-        val lhsStartTime = LocalDateTime.parse(lhs.getStartTime())
-        val rhsStartTime = LocalDateTime.parse(rhs.getStartTime())
+        val lhsStartTime = LocalDateTime.parse(lhs.startTime)
+        val rhsStartTime = LocalDateTime.parse(rhs.startTime)
 
         val lhsLocalDate = lhsStartTime.toLocalDate()
         val rhsLocalDate = rhsStartTime.toLocalDate()

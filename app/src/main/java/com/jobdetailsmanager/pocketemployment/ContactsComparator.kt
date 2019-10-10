@@ -15,9 +15,6 @@
 
 package com.jobdetailsmanager.pocketemployment
 
-import org.joda.time.DateTime
-import org.joda.time.LocalDate
-
 import java.util.Comparator
 
 

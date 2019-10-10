@@ -47,8 +47,6 @@ class StaffingCompaniesFragment : Fragment()
 
     lateinit var stringList: MutableList<String>
 
-    lateinit var greenDaoHelper: GreenDaoHelper
-
     lateinit var imm: InputMethodManager
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -62,7 +60,7 @@ class StaffingCompaniesFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
 
-        return inflater!!.inflate(R.layout.fragment_staffing_companies, container, false)
+        return inflater.inflate(R.layout.fragment_staffing_companies, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
@@ -72,7 +70,7 @@ class StaffingCompaniesFragment : Fragment()
         arrayAdapter = StaffingCompaniesListAdapter(activity!!, android.R.layout.simple_list_item_1)
         stringList = ArrayList()
 
-        greenDaoHelper = GreenDaoHelper(activity!!)
+        //greenDaoHelper = GreenDaoHelper(activity!!)
         //val recruiterCompanyDao = greenDaoHelper.initSession().recruiterCompanyDao
 
 //        val recruiterCompanies = recruiterCompanyDao.queryBuilder().list()

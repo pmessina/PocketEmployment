@@ -60,8 +60,6 @@ class JobPositionsFragment : Fragment(), JobPositionsDialogFragment.AddJobPositi
             val output = args.getString("data")
             //List<String> data = Arrays.asList(args.getString("data"));
 
-            val greenDaoHelper = GreenDaoHelper(activity!!)
-
             //val jobTitles = greenDaoHelper.initSession().jobPositionDao.queryBuilder().list()
 
             //val adapter = JobPositionsListAdapter(activity!!, android.R.layout.simple_list_item_1, jobTitles)

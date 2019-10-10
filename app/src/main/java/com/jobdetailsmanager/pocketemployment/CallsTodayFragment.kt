@@ -30,15 +30,11 @@ import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.Toast
 
-import com.github.salomonbrys.kodein.KodeinInjector
-import com.github.salomonbrys.kodein.android.FragmentInjector
-import com.github.salomonbrys.kodein.instance
-import com.github.salomonbrys.kodein.with
 
 
-class CallsTodayFragment : Fragment(), FragmentInjector,  LoaderManager.LoaderCallbacks<Cursor>
+class CallsTodayFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
 {
-    override val injector: KodeinInjector = KodeinInjector()
+    //override val injector: KodeinInjector = KodeinInjector()
 
     //@BindView(R.id.calls_listview)
     protected var listView: ListView? = null
@@ -54,9 +50,8 @@ class CallsTodayFragment : Fragment(), FragmentInjector,  LoaderManager.LoaderCa
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-        initializeInjector()
 
-        callsNotificationManager = injector.kodein().value.with(activity).instance()
+        //callsNotificationManager = injector.kodein().value.with(activity).instance()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
@@ -90,9 +85,9 @@ class CallsTodayFragment : Fragment(), FragmentInjector,  LoaderManager.LoaderCa
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor>
     {
-        lcp = CallsLogContentProvider(activity)
+        lcp = CallsLogContentProvider(context!!)
 
-        cursorLoader = lcp.getCallsToday()
+        cursorLoader = lcp.callsToday
 
         return cursorLoader
 
@@ -164,7 +159,7 @@ class CallsTodayFragment : Fragment(), FragmentInjector,  LoaderManager.LoaderCa
     override fun onDestroy()
     {
         super.onDestroy()
-        destroyInjector()
+
     }
 
 }
