@@ -1,0 +1,93 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              tools:context="com.pirateman.recruitercallsactivity.JobPositionsDialogFragment">
+
+
+    <!--<EditText-->
+        <!--android:id="@+id/edtJobPositionTitle"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="3dp"-->
+        <!--android:ems="10"-->
+        <!--android:hint="Job Position Title"-->
+        <!--android:inputType="textPersonName"/>-->
+
+    <TextView
+        android:text="New Job Position"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="18sp"
+        android:textAlignment="center"/>
+
+    <AutoCompleteTextView
+        android:id="@+id/actvJobPositionTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:textColorHint="@color/light_grey"
+        android:hint="Name"
+        />
+
+    <EditText
+        android:id="@+id/edtClientName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:ems="10"
+        android:hint="Client Name"
+        android:textColorHint="@color/light_grey"
+        android:inputType="textPersonName"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnOkAddJobPosition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:text="Ok"
+            android:background="@android:color/transparent"/>
+
+        <Button
+            android:id="@+id/btnCancelAddJobPosition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+
+    <!--<ImageButton-->
+    <!--android:id="@+id/imgBtnAddJobPosition"-->
+    <!--android:layout_width="80dp"-->
+    <!--android:layout_height="51dp"-->
+    <!--android:background="@android:color/transparent"-->
+    <!--android:clickable="true"-->
+    <!--android:src="@drawable/add_icon_png_2464_54x54"/>-->
+
+    <!--<ListView-->
+    <!--android:id="@+id/lvStaffingCompanies"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_marginBottom="5dp"-->
+    <!--android:layout_marginLeft="30dp"-->
+    <!--android:layout_marginRight="44dp"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:layout_weight="1"/>-->
+
+</LinearLayout>

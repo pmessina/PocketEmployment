@@ -1,0 +1,94 @@
+<LinearLayout   xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context="com.pirateman.recruitercallsemployers.EditEmployersFragment"
+                android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Information for:"
+            android:id="@+id/tvInfoLabel"
+            android:paddingRight="@dimen/activity_horizontal_margin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/tvPhoneNumber"
+            android:layout_gravity="center_vertical"
+            android:hint="Contact Number" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/tbxCompanyName"
+            android:hint="Company Name" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/tbxCompanyAddress"
+            android:hint="Company Address"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spIndustryName"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/editText"
+            android:layout_gravity="center_horizontal"
+            android:hint="Company Description"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spRecruiterCallState"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"/>
+
+    </LinearLayout>
+
+
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/btnUpdateEmployerInfo"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recruiter Lookup"
+        android:id="@+id/btnRecruiterCompLookup"
+        />
+
+</LinearLayout>
+

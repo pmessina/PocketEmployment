@@ -1,0 +1,36 @@
+<!--<LinearLayout-->
+    <!---->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/tvParentTodoList"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:drawableBottom="@color/blue"/>
+
+    <!--android:src="@drawable/add_icon_png_2464_54x54"-->
+    <!--<ImageButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/selectors_add_button"-->
+        <!--android:id="@+id/imgAddInterview"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@android:color/transparent"/>-->
+    <!--<ImageButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/minus"-->
+        <!--android:id="@+id/imgRemoveInterview"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@android:color/transparent"/>-->
+
+<!--</LinearLayout>-->
+

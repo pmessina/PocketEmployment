@@ -1,0 +1,43 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:layout_gravity="center_horizontal"
+    android:id="@+id/llStaffingCompanyDetails"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="3dp"
+        android:hint="Recruiter Name"
+        android:ems="10"
+        android:id="@+id/tvStaffingCompanyName"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="3dp"
+        android:hint="Recruiter Address"
+        android:ems="10"
+        android:id="@+id/tvStaffingCompanyAddress"/>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:id="@+id/imgbtnRemoveStaffingCompany"
+        android:src="@drawable/minus"
+        android:background="@android:color/transparent"/>
+
+</LinearLayout>

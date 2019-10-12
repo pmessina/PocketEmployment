@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:baselineAligned="false"
+              android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+              android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/tvChildTodoList"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp"
+        android:drawableBottom="@color/blue"/>
+
+</LinearLayout>
+
+
+<!--<LinearLayout xmlns:android="com.googlecode.gmail4j.http://schemas.android.com/apk/res/android"-->
+              <!--android:orientation="horizontal"-->
+              <!--android:baselineAligned="false"-->
+              <!--android:layout_width="match_parent"-->
+              <!--android:layout_height="wrap_content">-->
+
+<!--<LinearLayout-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_margin="1dp">-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:hint="Interview Type"-->
+        <!--android:id="@+id/tvInterviewType"/>-->
+
+<!--</LinearLayout>-->
+
+<!--<LinearLayout-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_margin="1dp">-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:layout_margin="2dp"-->
+        <!--android:hint="Start Time"-->
+        <!--android:id="@+id/tvStartTime"/>-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="2dp"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:hint="End Time"-->
+        <!--android:id="@+id/tvEndTime"/>-->
+
+<!--</LinearLayout>-->
+
+<!--<LinearLayout-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_margin="1dp">-->
+
+    <!--<ImageButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:id="@+id/imageButton"-->
+        <!--android:background="@drawable/abc_ic_clear_mtrl_alpha"/>-->
+<!--</LinearLayout>-->
+
+<!--</LinearLayout>-->

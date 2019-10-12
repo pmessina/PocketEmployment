@@ -1,0 +1,46 @@
+<LinearLayout
+         xmlns:android="http://schemas.android.com/apk/res/android"
+         xmlns:tools="http://schemas.android.com/tools"
+         android:layout_width="200dp"
+         android:layout_height="wrap_content"
+         android:id="@+id/llAddRecruiterPhoneNumber"
+         android:orientation="horizontal"
+         tools:context="com.pirateman.recruitercallscontactdetails.RecruiterPhoneNumberFragment">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:inputType="phone"
+            android:ems="10"
+            android:id="@+id/edtPhoneNumber"
+            android:hint="Phone Number"/>
+
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add"
+            android:id="@+id/imgbtnPlus"
+            android:background="@android:color/transparent"
+            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_weight="1"/>
+        <!--android:onClick="onClick"-->
+        <!--<ImageButton-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/imgMinus"-->
+            <!--android:onClick="onClick"-->
+            <!--android:src="@drawable/minus"-->
+            <!--android:paddingLeft="5dp"-->
+            <!--android:paddingStart="5dp"-->
+            <!--android:paddingTop="5dp"-->
+            <!--android:paddingBottom="5dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@android:color/transparent"/>-->
+
+    </LinearLayout>
+

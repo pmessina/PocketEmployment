@@ -1,0 +1,79 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context="com.pirateman.staffingcompanies.StaffingCompaniesFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edtStaffingCompanyName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="2"
+            android:ems="10"
+            android:hint="Staffing Company Name"
+            android:inputType="textPersonName"/>
+
+        <ImageButton
+            android:id="@+id/imgbtnAddStaffingCompany"
+            android:layout_width="80dp"
+            android:layout_height="51dp"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:src="@drawable/add_icon_png_2464_54x54"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvStaffingCompanies"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="44dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"/>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tbNavDrawer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/tbOk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="OK"/>
+
+            <Button
+                android:id="@+id/tbCancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cancel"/>
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+</LinearLayout>
+

@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+
+    <item android:id="@+id/calls_history" android:title="Call History"
+        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/delete_contacts" android:title="Delete Contacts"
+    android:orderInCategory="200" app:showAsAction="never" />
+
+    <!--Comment when done with testing-->
+    <item android:id="@+id/add_contacts" android:title="Add Contacts For Testing"
+          android:orderInCategory="200" app:showAsAction="never" />
+
+
+
+</menu>

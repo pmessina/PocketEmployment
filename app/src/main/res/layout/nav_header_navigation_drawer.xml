@@ -1,0 +1,56 @@
+<!-- TODO: customize layout-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <!--android:background="@drawable/side_nav_bar"-->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--app:srcCompat="@drawable/ic_action_name"-->
+        <!--android:paddingTop="@dimen/nav_header_vertical_spacing"-->
+        <!---->
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/nav_header_height">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="240dp"
+                android:background="@drawable/job_market_pic"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/nav_header_vertical_spacing"
+                android:text="Recruiter Calls Log"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="pmm0501@gmail.com"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="29dp"/>
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

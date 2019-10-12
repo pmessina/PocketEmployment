@@ -1,0 +1,50 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.pirateman.recruitercallsactivity.RecruiterCallsTodoList">
+
+    <group
+        android:id="@+id/menu_group_recruiters"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_recruitingCompanies"
+            android:title="Staffing Agencies"
+            app:showAsAction="never"
+            android:icon="@drawable/recruitericon"/>
+
+        <item android:id="@+id/nav_recruiters"
+              android:title="Recruiters"
+              app:showAsAction="never"
+              android:icon="@drawable/recruitericon"/>
+
+    </group>
+
+    <group
+        android:id="@+id/menu_group_calls"
+        android:checkableBehavior="single">
+
+        <item android:id="@+id/nav_calls"
+              android:title="Calls"
+              app:showAsAction="never"
+              android:icon="@android:drawable/ic_menu_call"/>
+        <item android:id="@+id/nav_calls_log"
+              android:title="Calls Log"
+              app:showAsAction="never"
+              android:icon="@drawable/logbook"/>
+        <item android:id="@+id/nav_interviews"
+              android:title="Interviews"
+              app:showAsAction="never"
+              android:icon="@drawable/interview"/>
+    </group>
+    <group
+        android:id="@+id/menu_group_settings"
+        android:checkableBehavior="single">
+
+        <item android:id="@+id/nav_settings"
+              android:icon="@drawable/icon_settings"
+              app:showAsAction="never"
+              android:title="Settings"/>
+
+    </group>
+
+</menu>

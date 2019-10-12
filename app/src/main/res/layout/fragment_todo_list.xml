@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                tools:context="com.pirateman.recruitercallsactivity.RecruiterCallsTodoList"
+              style="@style/MaterialTheme">
+
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<android.support.v7.widget.Toolbar-->
+    <!--android:id="@+id/toolbar"-->
+    <!--android:minHeight="?android:attr/actionBarSize"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:contentInsetEnd="0dp"-->
+    <!--app:contentInsetStart="0dp"-->
+    <!--android:theme="@style/ToolbarTheme"/>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_gravity="center">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="Things to do in the Job World"-->
+            <!--android:id="@+id/textView"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="5dp"/>-->
+
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:groupIndicator="@drawable/selectors"
+        android:id="@+id/expListViewTodoList"/>
+    <!--android:childIndicator="@android:drawable/arrow_up_float"-->
+    <!--<ListView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@android:id/list"-->
+        <!--android:padding="@dimen/activity_horizontal_margin"/>-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Add Interview"-->
+        <!--android:id="@+id/todo_add_interview"/>-->
+
+
+</LinearLayout>
