@@ -11,6 +11,7 @@
     <color name="colorBackground">#61acb0</color>
     <color name="hint_color">#80f5f0f0</color>
     <color name="light_grey">#cccccc</color>
+    <color name="white">#ffffff</color>
 
     <color name="blue" type="color">#FF33B5E5</color>
     <color name="green" type="color">#FF99CC00</color>

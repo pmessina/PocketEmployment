@@ -45,14 +45,6 @@ class JobPosition {
     var employerId: Long = 0
     var interviewId: Long = 0
 
-    /** Used to resolve relations  */
-    //    @Generated(hash = 2040040024)
-    //    private transient DaoSession daoSession;
-    //
-    //    /** Used for active entity operations. */
-    //    @Generated(hash = 2120035555)
-    //    private transient JobPositionDao myDao;
-
     var jobPositionTitle: String? = null
 
     var jobPositionDescription: String? = null

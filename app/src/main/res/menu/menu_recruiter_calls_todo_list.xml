@@ -17,11 +17,11 @@
               app:showAsAction="never"
               android:icon="@drawable/recruitericon"/>
 
-    </group>
+<!--    </group>-->
 
-    <group
-        android:id="@+id/menu_group_calls"
-        android:checkableBehavior="single">
+<!--    <group-->
+<!--        android:id="@+id/menu_group_calls"-->
+<!--        android:checkableBehavior="single">-->
 
         <item android:id="@+id/nav_calls"
               android:title="Calls"
@@ -34,16 +34,17 @@
         <item android:id="@+id/nav_interviews"
               android:title="Interviews"
               app:showAsAction="never"
-              android:icon="@drawable/interview"/>
-    </group>
-    <group
-        android:id="@+id/menu_group_settings"
-        android:checkableBehavior="single">
 
-        <item android:id="@+id/nav_settings"
-              android:icon="@drawable/icon_settings"
-              app:showAsAction="never"
-              android:title="Settings"/>
+              android:icon="@drawable/interview"/>
+<!--    </group>-->
+<!--    <group-->
+<!--        android:id="@+id/menu_group_settings"-->
+<!--        android:checkableBehavior="single">-->
+
+<!--        <item android:id="@+id/nav_settings"-->
+<!--              android:icon="@drawable/icon_settings"-->
+<!--              app:showAsAction="never"-->
+<!--              android:title="Settings"/>-->
 
     </group>
 

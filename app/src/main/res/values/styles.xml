@@ -7,7 +7,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-         Customize your theme here.
+        Customize your theme here.
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -17,7 +17,8 @@
         <item name="android:colorBackground">@color/background_material_light_2</item>
         <item name="android:colorForeground">@color/foreground_material_light_3</item>
         <item name="android:textColorPrimary">@color/text_color_primary</item>
-        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:windowBackground">@drawable/job_market_pic</item>
+
     </style>
 
     <style name="CustomNewTheme" parent="Theme.AppCompat.NoActionBar" >

@@ -24,7 +24,7 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.jobdetailsmanager.pocketemployment.RecruiterCallState
+import com.jobdetailsmanager.pocketemployment.recruiters.RecruiterCallState
 
 import java.io.Serializable
 import java.time.LocalDateTime

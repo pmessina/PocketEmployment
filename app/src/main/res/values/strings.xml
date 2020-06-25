@@ -14,7 +14,7 @@
     <string name="hello_world">Hello world!</string>
 
     <string name="title_activity_recruiter_calls_details">RecruiterCallsDetails</string>
-    <string name="recruiter_contact_number"/>
+    <string name="recruiter_contact_number" />
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
     <string name="title_activity_recruiter_calls_log">Recruiter Calls Log</string>
     <string name="title_activity_recruiter_call_dates">RecruiterCallDatesActivity</string>
@@ -99,7 +99,7 @@
         <item>3</item>
     </string-array>
 
-    <string-array name="multi_select_list_preference_default_value"/>
+    <string-array name="multi_select_list_preference_default_value" />
 
     <string name="pref_title_system_sync_settings">System sync settings</string>
 
@@ -139,7 +139,6 @@
         <item>Staffing Companies</item>
         <item>Manage Staffing Companies</item>
     </string-array>
-
 
 
 </resources>

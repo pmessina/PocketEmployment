@@ -21,10 +21,12 @@ import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.database.Cursor
 import android.os.Build
 import android.provider.CalendarContract
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.loader.content.CursorLoader
 import permissions.dispatcher.NeedsPermission
 import java.time.LocalDate
@@ -39,10 +41,6 @@ import java.util.*
 @RequiresApi(Build.VERSION_CODES.O)
 class AndroidCalendarProvider(internal var context: Context)
 {
-
-    //DatabaseHelper helper;
-
-    //internal var helper: GreenDaoHelper? = null
 
     internal var cursor: Cursor? = null
 
@@ -146,7 +144,17 @@ class AndroidCalendarProvider(internal var context: Context)
 
         val arguments = arrayOf("%interview%")
 
-        cursor = cr.query(calendarUri, projection, query.toString(), arguments, eventStartCol + " ASC")
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_CALENDAR) == PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            cursor = cr.query(calendarUri, projection, query.toString(), arguments, eventStartCol + " ASC")
+        }
+
 
         return cursor
     }
@@ -202,7 +210,7 @@ class AndroidCalendarProvider(internal var context: Context)
 
         val arguments: Array<String>? = null// new String[]{"LOWER(%interview%)"};
 
-        return CursorLoader(context, calendarUri, projection, null, arguments, eventStartCol + " ASC")
+        return CursorLoader(context, calendarUri, projection, query.toString(), arguments, "$eventStartCol ASC")
     }
 
     //Get all interview calendar events in a week that have the title with "Interview" in them
@@ -322,25 +330,20 @@ class AndroidCalendarProvider(internal var context: Context)
     companion object
     {
         private val calendarUri = CalendarContract.Events.CONTENT_URI
-        private val calDisplayName = CalendarContract.Events.CALENDAR_DISPLAY_NAME
-        private val calId = CalendarContract.Events.CALENDAR_ID
-        private val eventStartCol = CalendarContract.Events.DTSTART
-        private val eventEndCol = CalendarContract.Events.DTEND
-        private val eventTitle = CalendarContract.Events.TITLE
-        private val eventDescription = CalendarContract.Events.DESCRIPTION
-        private val eventTimeZone = CalendarContract.Events.EVENT_TIMEZONE
-        private val eventAllDay = CalendarContract.Events.ALL_DAY
-        private val Id = CalendarContract.Events._ID
-        private val reminder = CalendarContract.Events.ALLOWED_REMINDERS
+        private const val calDisplayName = CalendarContract.Events.CALENDAR_DISPLAY_NAME
+        private const val calId = CalendarContract.Events.CALENDAR_ID
+        private const val eventStartCol = CalendarContract.Events.DTSTART
+        private const val eventEndCol = CalendarContract.Events.DTEND
+        private const val eventTitle = CalendarContract.Events.TITLE
+        private const val eventDescription = CalendarContract.Events.DESCRIPTION
+        private const val eventTimeZone = CalendarContract.Events.EVENT_TIMEZONE
+        private const val eventAllDay = CalendarContract.Events.ALL_DAY
+        private const val Id = CalendarContract.Events._ID
+        private const val reminder = CalendarContract.Events.ALLOWED_REMINDERS
 
         val RC_READ_CALENDER = 120
     }
 
 }
 
-val LocalDateTime.millis : Long
-get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-    this.toInstant(ZoneOffset.UTC).toEpochMilli()
-} else {
-    TODO("VERSION.SDK_INT < O")
-}
+

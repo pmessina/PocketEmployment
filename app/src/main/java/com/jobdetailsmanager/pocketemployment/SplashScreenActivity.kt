@@ -40,8 +40,8 @@ class SplashScreenActivity : Activity() {
         //        titleSplashScreen.setTypeface(face);
 
         Handler().postDelayed({
-                            val intent = Intent(SplashScreenActivity@this, PocketEmploymentTodoList::class.java)
-                            startActivity(intent)
+            val intent = Intent(SplashScreenActivity@ this, PocketEmploymentTodoList::class.java)
+            startActivity(intent)
             finish()
         }, 3000)
 

@@ -179,7 +179,7 @@ class TodoListExpListAdapter(val context: Context) : BaseExpandableListAdapter()
         return true
     }
 
-    internal class ParentViewHolder(view: View)
+    private class ParentViewHolder(view: View)
     {
         //@BindView(R.id.tvParentTodoList)
         var todoListParent: TextView? = null
@@ -190,7 +190,7 @@ class TodoListExpListAdapter(val context: Context) : BaseExpandableListAdapter()
         }
     }
 
-    internal class ChildViewHolder(view: View)
+    private class ChildViewHolder(view: View)
     {
         //@BindView(R.id.tvChildTodoList)
         var todoListChild: TextView? = null

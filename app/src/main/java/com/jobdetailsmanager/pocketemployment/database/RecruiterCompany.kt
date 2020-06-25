@@ -15,32 +15,22 @@
 
 package com.jobdetailsmanager.pocketemployment.database
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.jobdetailsmanager.pocketemployment.database.Recruiter
 
 
 @Entity(tableName = "recruiter_companies")
-class RecruiterCompany {
+data class RecruiterCompany(
+        @ColumnInfo(name = "recruiter_company_name")
+        var recruiterCompanyName: String?,
+        @ColumnInfo(name = "recruiter_company_address")
+        var recruiterCompanyAddress: String?,
+        @ColumnInfo(name = "recruiter_company_website")
+        var recruiterCompanyWebsite: String?) {
 
     @PrimaryKey(autoGenerate = true)
-    var recruiterCompanyId: Int = 0
-
-    var address: String? = null
-
-    var website: String? = null
-
-    //private var recruiters: List<Recruiter>? = null
-
-    constructor() {}
-
-    @Ignore
-    constructor(recruiterCompanyId: Int, address: String,
-                website: String) {
-        this.recruiterCompanyId = recruiterCompanyId
-        this.address = address
-        this.website = website
-    }
+    @ColumnInfo(name = "recruiter_company_id")
+    var recruiterCompanyId: Long = 0
 
 }

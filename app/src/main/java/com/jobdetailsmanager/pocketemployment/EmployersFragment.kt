@@ -96,7 +96,7 @@ class EmployersFragment : ListFragment()
     fun ToEditEmployersFragment()
     {
         val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
-        fragmentTransaction?.replace(R.id.drawer_layout_container, EditEmployersFragment())
+        //fragmentTransaction?.replace(R.id.drawer_layout_container, EditEmployersFragment())
         fragmentTransaction?.addToBackStack(null)
         fragmentTransaction?.commit()
     }

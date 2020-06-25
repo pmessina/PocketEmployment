@@ -16,29 +16,27 @@
 package com.jobdetailsmanager.pocketemployment.database
 
 
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
+import androidx.room.*
 
-@Entity(tableName = "recruiters")
-class Recruiter {
+@Entity(tableName = "recruiters",
+        foreignKeys = [ForeignKey(entity = RecruiterCompany::class, parentColumns = ["recruiter_company_id"], childColumns = ["recruiter_id"])],
+        indices = [Index("recruiter_id")])
+data class Recruiter(
+        @ColumnInfo(name = "recruiter_name")
+        val recruiterName: String?,
+        @ColumnInfo(name = "recruiter_phone_number")
+        val recruiterPhoneNumber: String?,
+        @ColumnInfo(name = "recruiter_email_address")
+        val recruiterEmailAdress: String,
+        @ColumnInfo(name = "recruiter_company_id")
+        var recruiterCompanyId: Long
+) {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "recruiter_id")
     var recruiterId: Long = 0
 
-    var phoneNumber: String? = null
 
-    var emailAddress: String? = null
 
-    //private val recruiterCompany: RecruiterCompany? = null
-
-    constructor() {}
-
-    @Ignore
-    constructor(recruiterId: Long, phoneNumber: String, emailAddress: String) {
-        this.recruiterId = recruiterId
-        this.phoneNumber = phoneNumber
-        this.emailAddress = emailAddress
-    }
 
 }

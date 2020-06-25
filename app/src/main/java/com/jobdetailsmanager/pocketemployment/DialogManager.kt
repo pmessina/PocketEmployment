@@ -23,9 +23,17 @@ import android.widget.Toast
 class DialogManager(private val context: Context)
 {
 
+    private val dialog = AlertDialog.Builder(context)
+
     fun showDialog(title: String, dialogMessage: String, yesMessage: String, noMessage: String)
     {
-        val dialog = AlertDialog.Builder(context).setTitle(title).setMessage(dialogMessage).setPositiveButton("Yes") { dialog, which -> Toast.makeText(context, yesMessage, Toast.LENGTH_LONG).show() }.setNegativeButton("No") { dialog, which -> Toast.makeText(context, noMessage, Toast.LENGTH_LONG).show() }
+        dialog.setTitle(title)
+                .setMessage(dialogMessage)
+                .setPositiveButton("Yes") { dialog, which ->
+                    Toast.makeText(context, yesMessage, Toast.LENGTH_LONG).show()
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    Toast.makeText(context, noMessage, Toast.LENGTH_LONG).show() }
         val ad = dialog.create()
 
         ad.show()
@@ -33,7 +41,7 @@ class DialogManager(private val context: Context)
 
     fun showOkDialog(title: String, dialogMessage: String)
     {
-        val dialog = AlertDialog.Builder(context).setTitle(title).setMessage(dialogMessage).setNeutralButton("OK") { dialog, which -> dialog.dismiss() }
+        dialog.setTitle(title).setMessage(dialogMessage).setNeutralButton("OK") { dialog, which -> dialog.dismiss() }
 
         val ad = dialog.create()
 
@@ -42,7 +50,7 @@ class DialogManager(private val context: Context)
 
     fun showDialogFromService(title: String, incomingNumber: String)
     {
-        val dialog = AlertDialog.Builder(context).setTitle(title).setMessage("Is $incomingNumber from a recruiter?").setPositiveButton("Yes") { dialog, which ->
+        dialog.setTitle(title).setMessage("Is $incomingNumber from a recruiter?").setPositiveButton("Yes") { dialog, which ->
                     //isRecruiter = true;
                     Toast.makeText(context, "Do something if it is a Recruiter", Toast.LENGTH_LONG).show()
                 }.setNegativeButton("No") { dialog, which ->
